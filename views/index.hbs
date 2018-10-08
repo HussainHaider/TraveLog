@@ -1,0 +1,77 @@
+<div class="background-image">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12" style="display: flex;padding-top: 10px;">
+                <img src="images/logo_2.png" alt="TravelLog" height="50">
+                <h1 class="websiteName">TraveLog</h1>
+            </div>
+        </div>
+    </div>
+    <div class="form-signin">
+        <div class="loginBox">
+            <h3 class="login-heading">Make your adventures unforgettable.</h3>
+            <div style="display: flex;justify-content: center;">
+
+                <a class="btn btn-signup btn-facebook" style="width: 125px;border-radius: 0px;box-shadow: 0 3px 10px rgba(0,0,0,0.50);" onclick="facebooklogin()"><i class="fa fa-facebook-square"></i>Facebook</a>
+                <!--<a class="btn btn-signup btn-google"><i class="fa fa-google-plus"></i>Google plus</a>-->
+
+                <div style="margin-left: 10%;"
+                     class="g-signin2"
+                     data-onsuccess="onSignIn"
+                     data-onfailure="onSignInFailure">
+                </div>
+            </div>
+
+            <span class="or">- or - </span>
+
+
+            <a class="btn btn-signup" onclick="ShowRegisterDiv(1)" id="SignUp_button">Register with Email</a>
+            <br>
+            <a class="btn btn-signup" onclick="ShowRegisterDiv(2)" id="LoginIn_button">I have an account</a>
+
+
+
+
+            <div id="LoginIn">
+                <input type="email" class="form-control" placeholder="Email address" required autofocus>
+
+                <input type="password"  class="form-control" placeholder="Password" required>
+
+                <button class="btn btn-lg btn-block btn-signup" type="submit">Sign in</button>
+                <p class="forgot_password"><a>Forgot your password?</a></p>
+
+                <div class="bottom_signIn">
+                    <p>Not registered yet? </p>
+                    <button class="btn btn-register" type="submit" onclick="ShowRegisterDiv(1)">Register</button>
+                </div>
+            </div>
+
+
+
+            <div id="SignUp">
+                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+
+                <div style="display: flex;justify-content: center;">
+                    <input type="text" id="firstname" class="form-control" placeholder="First Name" required style="margin-right: 1%;">
+                    <input type="text" id="lastname" class="form-control" placeholder="last Name" required style="margin-left: 1%;">
+                </div>
+
+                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+
+
+                <button class="btn btn-block btn-signup" type="submit">Register</button>
+
+                <p class="privacy">By clicking this button, you agree to TraveLog's <a href="/">Privacy Policy</a>
+                    and <a href="/">Terms of Service</a><br>
+                </p>
+
+
+                <div class="bottom_signIn">
+                    <p>Already have an account? </p>
+                    <button class="btn btn-register" type="submit" onclick="ShowRegisterDiv(2)">SignIn</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
