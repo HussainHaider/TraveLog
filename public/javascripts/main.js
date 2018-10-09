@@ -12,7 +12,7 @@ function ShowRegisterDiv(num) {
 }
 
 function something() {
-
+    setTimeout(showTripsDiv, 3000);
     document.getElementById("SignUp").style.display = "none";
     document.getElementById("LoginIn").style.display = "none";
 }
