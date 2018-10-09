@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var sassMiddleware = require('node-sass-middleware');
+var hbs = require('express-handlebars');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/userProfile');
@@ -12,6 +13,8 @@ var exploreRouter = require('./routes/explore');
 var app = express();
 
 // view engine setup
+
+//app.engine('hbs', hbs({extname: 'hbs', defaultLayout: 'layout', layoutsDir: __dirname + '/views/layouts/'}));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
