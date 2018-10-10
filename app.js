@@ -9,8 +9,11 @@ var hbs = require('express-handlebars');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/userProfile');
 var exploreRouter = require('./routes/explore');
-
 var app = express();
+
+var config = require('./configuration/config');
+var passport = require('passport')
+    , FacebookStrategy = require('passport-facebook').Strategy;
 
 // view engine setup
 
@@ -34,6 +37,21 @@ app.use('/', indexRouter);
 app.use('/profile', usersRouter);
 app.use('/explore', exploreRouter);
 
+passport.use(new FacebookStrategy({
+        clientID: config.facebook_api_key,
+        clientSecret: config.facebook_api_secret,
+        callbackURL:config.callback_url
+    },
+    function(accessToken, refreshToken, profile, done) {
+        return done(null, profile);
+    }
+));
+
+app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['id','email', 'first_name','last_name'] }));
+
+app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', { successRedirect: '/profile',
+        failureRedirect: '/' }));
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
