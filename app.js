@@ -58,6 +58,9 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
