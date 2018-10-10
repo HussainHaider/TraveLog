@@ -26,7 +26,7 @@
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="/profile/settings">Settings</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Log Out</a>
+                    <a class="dropdown-item" href="/">Log Out</a>
                 </div>
             </div>
         </div>
@@ -64,7 +64,7 @@
             </div>
         </div>
     </div>
-    <div class="container" id="Trips_Div">
+    <div class="container" id="Trips_Div" style="display: none;">
         <div class="row">
             {{#each anyArray}}
             <div class="col-md-4 mb-4">
@@ -73,7 +73,7 @@
                     <div class="card-body">
                         <h5 class="card-title" style="text-align: center">Journal title</h5>
                         <div style="text-align: center">
-                            <a href="#" class="btn btn-primary">Show</a>
+                            <a href="/profile/profileJournal" class="btn btn-primary">Show</a>
                             <a href="#" class="btn btn-color">Edit</a>
                             <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#DeleteModal">Delete</a>
                         </div>
@@ -81,79 +81,19 @@
                 </div>
             </div>
             {{/each}}
-            <!--<div class="col-md-4 mb-4">-->
-                <!--<div class="card" style="width: 18rem;">-->
-                    <!--<img class="card-img-top" src="./images/_full.jpg" alt="Card image cap">-->
-                    <!--<div class="card-body">-->
-                        <!--<h5 class="card-title" style="text-align: center">Journal title</h5>-->
-                        <!--<div style="text-align: center">-->
-                            <!--<a href="#" class="btn btn-primary">Show</a>-->
-                            <!--<a href="#" class="btn btn-color">Edit</a>-->
-                            <!--<a href="#" class="btn btn-danger">Delete</a>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-
-
-            <!--<div class="col-md-4 mb-4">-->
-                <!--<div class="card" style="width: 18rem;">-->
-                    <!--<img class="card-img-top" src="./images/_full.jpg" alt="Card image cap">-->
-                    <!--<div class="card-body">-->
-                        <!--<h5 class="card-title" style="text-align: center">Journal title</h5>-->
-                        <!--<div style="text-align: center">-->
-                            <!--<a href="#" class="btn btn-primary">Show</a>-->
-                            <!--<a href="#" class="btn btn-color">Edit</a>-->
-                            <!--<a href="#" class="btn btn-danger">Delete</a>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-
-
-            <!--<div class="col-md-4 mb-4">-->
-                <!--<div class="card" style="width: 18rem;">-->
-                    <!--<img class="card-img-top" src="./images/_full.jpg" alt="Card image cap">-->
-                    <!--<div class="card-body">-->
-                        <!--<h5 class="card-title" style="text-align: center">Journal title</h5>-->
-                        <!--<div style="text-align: center">-->
-                            <!--<a href="#" class="btn btn-primary">Show</a>-->
-                            <!--<a href="#" class="btn btn-color">Edit</a>-->
-                            <!--<a href="#" class="btn btn-danger">Delete</a>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-
-
-            <!--<div class="col-md-4 mb-4">-->
-                <!--<div class="card" style="width: 18rem;">-->
-                    <!--<img class="card-img-top" src="./images/_full.jpg" alt="Card image cap">-->
-                    <!--<div class="card-body">-->
-                        <!--<h5 class="card-title" style="text-align: center">Journal title</h5>-->
-                        <!--<div style="text-align: center">-->
-                            <!--<a href="#" class="btn btn-primary">Show</a>-->
-                            <!--<a href="#" class="btn btn-color">Edit</a>-->
-                            <!--<a href="#" class="btn btn-danger">Delete</a>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-
-
 
         </div>
     </div>
 
-    <!--<div class="circle" id="loader">-->
-        <!--<div class="circle__mask on-left">-->
-            <!--<div class="circle__inner"></div>-->
-        <!--</div>-->
-        <!--<div class="circle__mask on-right">-->
-            <!--<div class="circle__inner"></div>-->
-        <!--</div>-->
-        <!--<div class="circle__holder"></div>-->
-    <!--</div>-->
+    <div class="circle" id="loader">
+        <div class="circle__mask on-left">
+            <div class="circle__inner"></div>
+        </div>
+        <div class="circle__mask on-right">
+            <div class="circle__inner"></div>
+        </div>
+        <div class="circle__holder"></div>
+    </div>
 
 </div>
 

@@ -10,4 +10,8 @@ router.get('/settings', function(req, res, next) {
     res.render('Settings', { title: 'Settings | TraveLog',logo:'../images/logo.jpg' });
 });
 
+router.get('/profileJournal', function(req, res, next) {
+    res.render('profileJournal', { title: 'Journal Name | TraveLog',logo:'../images/logo.jpg' });
+});
+
 module.exports = router;
