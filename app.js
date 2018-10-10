@@ -39,6 +39,16 @@ app.use('/', indexRouter);
 app.use('/profile', usersRouter);
 app.use('/explore', exploreRouter);
 
+// Passport session setup.
+passport.serializeUser(function(user, done) {
+    done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+    done(null, obj);
+});
+
+// Use the FacebookStrategy within Passport.
 passport.use(new FacebookStrategy({
         clientID: config.facebook_api_key,
         clientSecret: config.facebook_api_secret,
