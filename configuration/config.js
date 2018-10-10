@@ -5,6 +5,6 @@ module.exports={
 */
 
 	"facebook_api_key":"308338449961614",
-	"facebook_api_secret":"",
+	"facebook_api_secret":"349fa2dc05f27a2ce3cd9ae05cf26a8b",
     "callback_url":"https://travelog-app.herokuapp.com/auth/facebook/callback"
 };
