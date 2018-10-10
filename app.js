@@ -63,16 +63,16 @@ passport.use(new FacebookStrategy({
     }
 ));
 
-passport.use(new GoogleStrategy({
-        clientID: config.googleAuth.CLIENT_ID,
-        clientSecret: config.googleAuth.CLIENT_SECRET,
-        callbackURL: config.googleAuth.callback_url
-    },
-    function(token, tokenSecret, profile, done) {
-        //profile.id,profile.displayName,profile.emails[0].value
-            return done(err, user);
-    }
-));
+// passport.use(new GoogleStrategy({
+//         clientID: config.googleAuth.CLIENT_ID,
+//         clientSecret: config.googleAuth.CLIENT_SECRET,
+//         callbackURL: config.googleAuth.callback_url
+//     },
+//     function(token, tokenSecret, profile, done) {
+//         //profile.id,profile.displayName,profile.emails[0].value
+//             return done(err, user);
+//     }
+// ));
 
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email'] }));
 
@@ -84,11 +84,11 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
-app.get('/auth/google',
-    passport.authenticate('google', { scope: ['profile', 'email'] }));
-
-app.get('/auth/google/callback',
-    passport.authenticate('google', { successRedirect : '/profile',failureRedirect: '/' }));
+// app.get('/auth/google',
+//     passport.authenticate('google', { scope: ['profile', 'email'] }));
+//
+// app.get('/auth/google/callback',
+//     passport.authenticate('google', { successRedirect : '/profile',failureRedirect: '/' }));
 
 // error handler
 app.use(function(err, req, res, next) {
