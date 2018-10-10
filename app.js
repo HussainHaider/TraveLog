@@ -12,7 +12,7 @@ var exploreRouter = require('./routes/explore');
 var app = express();
 
 var config = require('./configuration/config');
-var GoogleStrategy = require('passport-google-oauth').OAuthStrategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var passport = require('passport')
     , FacebookStrategy = require('passport-facebook').Strategy;
 
