@@ -1,20 +1,20 @@
 function ShowRegisterDiv(num) {
     document.getElementById("SignUp_button").style.display = "none";
-    document.getElementById("LoginIn_button").style.display = "none";
+    document.getElementById("LogIn_button").style.display = "none";
     if (num === 1) {
         document.getElementById("SignUp").style.display = "block";
-        document.getElementById("LoginIn").style.display = "none";
+        document.getElementById("LogIn").style.display = "none";
     }
     if (num === 2) {
         document.getElementById("SignUp").style.display = "none";
-        document.getElementById("LoginIn").style.display = "block";
+        document.getElementById("LogIn").style.display = "block";
     }
 }
 
 function something() {
     setTimeout(showTripsDiv, 3000);
-    document.getElementById("SignUp").style.display = "none";
-    document.getElementById("LoginIn").style.display = "none";
+    // document.getElementById("SignUp").style.display = "none";
+    // document.getElementById("LoginIn").style.display = "none";
 }
 
 function ShowTrips(id) {
