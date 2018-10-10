@@ -21,6 +21,8 @@ var passport = require('passport')
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -58,8 +60,6 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
-app.use(passport.initialize());
-app.use(passport.session());
 
 // error handler
 app.use(function(err, req, res, next) {
