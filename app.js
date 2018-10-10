@@ -63,6 +63,12 @@ passport.use(new FacebookStrategy({
     }
 ));
 
+app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email'] }));
+
+app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', { successRedirect: '/profile',
+        failureRedirect: '/' }));
+
 passport.use(new GoogleStrategy({
         clientID: config.googleAuth.CLIENT_ID,
         clientSecret: config.googleAuth.CLIENT_SECRET,
@@ -74,21 +80,18 @@ passport.use(new GoogleStrategy({
     }
 ));
 
-app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email'] }));
+app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
-app.get('/auth/facebook/callback',
-    passport.authenticate('facebook', { successRedirect: '/profile',
-        failureRedirect: '/' }));
+app.get('/auth/google/callback',
+    passport.authenticate('google', { successRedirect : '/profile',failureRedirect: '/' }));
+
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
 
-app.get('/auth/google',
-    passport.authenticate('google', { scope: ['profile', 'email'] }));
-
-app.get('/auth/google/callback',
-    passport.authenticate('google', { successRedirect : '/profile',failureRedirect: '/' }));
 
 // error handler
 app.use(function(err, req, res, next) {
