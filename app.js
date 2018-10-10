@@ -12,6 +12,7 @@ var exploreRouter = require('./routes/explore');
 var app = express();
 
 var config = require('./configuration/config');
+var GoogleStrategy = require('passport-google-oauth').OAuthStrategy;
 var passport = require('passport')
     , FacebookStrategy = require('passport-facebook').Strategy;
 
@@ -50,13 +51,26 @@ passport.deserializeUser(function(obj, done) {
 
 // Use the FacebookStrategy within Passport.
 passport.use(new FacebookStrategy({
-        clientID: config.facebook_api_key,
-        clientSecret: config.facebook_api_secret,
-        callbackURL:config.callback_url
+        clientID: config.facebookAuth.api_key,
+        clientSecret: config.facebookAuth.api_secret,
+        callbackURL:config.facebookAuth.callback_url,
+        profileFields: ['id', 'first_name', 'last_name', 'email']
     },
     function(accessToken, refreshToken, profile, done) {
         console.log('profile' + profile);
+        //profile.id,profile.name(profile.name.givenName),profile.emails[0].value
         return done(null, profile);
+    }
+));
+
+passport.use(new GoogleStrategy({
+        clientID: config.googleAuth.CLIENT_ID,
+        clientSecret: config.googleAuth.CLIENT_SECRET,
+        callbackURL: config.googleAuth.callback_url
+    },
+    function(token, tokenSecret, profile, done) {
+        //profile.id,profile.displayName,profile.emails[0].value
+            return done(err, user);
     }
 ));
 
@@ -70,6 +84,11 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
+app.get('/auth/google',
+    passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+app.get('/auth/google/callback',
+    passport.authenticate('google', { successRedirect : '/profile',failureRedirect: '/' }));
 
 // error handler
 app.use(function(err, req, res, next) {
