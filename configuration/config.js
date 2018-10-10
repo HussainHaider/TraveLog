@@ -9,8 +9,8 @@ module.exports={
         "callback_url": "https://travelog-app.herokuapp.com/auth/facebook/callback",
     },
     'googleAuth' : {
-        "CLIENT_ID": "202266027367-d0ferod80naf0r5ac75b69rvfa0ma82a.apps.googleusercontent.com",
-        "CLIENT_SECRET": "ZoHff-ojoqRkC7ckg-E0ntub",
+        "CLIENT_ID": "202266027367-9pu44m95a2hfs9ts46emkuk0f9j18502.apps.googleusercontent.com",
+        "CLIENT_SECRET": "3g04XpqNNTuaoPs7E0txV1Sg",
         "callback_url": "https://travelog-app.herokuapp.com/auth/google/callback"
     }
 };
