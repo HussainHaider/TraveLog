@@ -37,8 +37,8 @@ app.use(sassMiddleware({
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/profile', usersRouter);
-app.use('/explore', exploreRouter);
+app.use('/profile', isAuthenticated, usersRouter);
+app.use('/explore', isAuthenticated, exploreRouter);
 
 // Passport session setup.
 passport.serializeUser(function(user, done) {
@@ -85,6 +85,17 @@ app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'em
 app.get('/auth/google/callback',
     passport.authenticate('google', { successRedirect : '/profile',failureRedirect: '/' }));
 
+function isAuthenticated(req, res, next) {
+    // do any checks you want to in here
+
+    // CHECK THE USER STORED IN SESSION FOR A CUSTOM VARIABLE
+    // you can do this however you want with whatever variables you set up
+    if (false)
+        return next();
+
+    // IF A USER ISN'T LOGGED IN, THEN REDIRECT THEM SOMEWHERE
+    res.redirect('/');
+}
 
 
 // catch 404 and forward to error handler
