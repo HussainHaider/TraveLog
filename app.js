@@ -11,7 +11,16 @@ var usersRouter = require('./routes/userProfile');
 var exploreRouter = require('./routes/explore');
 var app = express();
 
+var firebase = require("firebase");
+var admin = require('firebase-admin');
+var session = require('express-session');
+
+var serviceAccount = require('./configuration/serviceAccountKey.json');
+
+
 var config = require('./configuration/config');
+firebase.initializeApp(config.firebase);
+var db = firebase.database();
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var passport = require('passport')
     , FacebookStrategy = require('passport-facebook').Strategy;
@@ -35,10 +44,47 @@ app.use(sassMiddleware({
   sourceMap: true
 }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+    secret: 'sf54s84a846as684saf4s68f4afajk',
+    resave: false,
+    saveUninitialized: true,
+    //cookie: { secure: true }
+}))
 
 app.use('/', indexRouter);
 app.use('/profile', isAuthenticated, usersRouter);
 app.use('/explore', isAuthenticated, exploreRouter);
+
+app.post('/addNewUser',function (req, res) {
+    firebase.auth().createUserWithEmailAndPassword(req.body.Email, req.body.password)
+        .then(function(userRecord) {
+            // See the UserRecord reference doc for the contents of userRecord.
+            db.ref('users/' + userRecord.user.uid).set({
+                username: req.body.fullName,
+                email: req.body.Email,
+                phoneNumber:req.body.number,
+            });
+            req.session.user=userRecord.user;
+            console.log("Successfully created new user:", userRecord.user.uid);
+            res.redirect('/profile');
+        })
+        .catch(function(error) {
+            console.log("Error creating new user:", error);
+            res.render('index', { title: 'Login/Signup | TraveLog',logo:'images/logo.jpg',loginError: false,SignUpError: true });
+        });
+});
+
+app.post('/userCheck',function (req,res) {
+    console.log("Check-User");
+    firebase.auth().signInWithEmailAndPassword(req.body.Email,req.body.password)
+        .then(function(userRecord) {
+            // See the UserRecord reference doc for the contents of userRecord.
+            console.log("Successfully fetched user data:", userRecord.user.uid);
+        })
+        .catch(function(error) {
+            console.log("Error fetching user data:", error);
+        });
+});
 
 // Passport session setup.
 passport.serializeUser(function(user, done) {
@@ -90,7 +136,7 @@ function isAuthenticated(req, res, next) {
 
     // CHECK THE USER STORED IN SESSION FOR A CUSTOM VARIABLE
     // you can do this however you want with whatever variables you set up
-    if (true)
+    if (req.session.user)
         return next();
 
     // IF A USER ISN'T LOGGED IN, THEN REDIRECT THEM SOMEWHERE

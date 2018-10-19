@@ -23,6 +23,13 @@
             </div>
 
             <span class="or">- or - </span>
+            {{#if SignUpError}}
+            <p class="error">Email already exist</p>
+            {{/if}}
+            {{#if loginError}}
+            <p class="error">Email or Password is incorrect</p>
+            {{/if}}
+
 
 
             <a class="btn btn-signup" onclick="ShowRegisterDiv(1)" id="SignUp_button">Register with Email</a>
@@ -33,43 +40,51 @@
 
 
             <div id="LogIn" style="display: none;">
-                <input type="email" class="form-control" placeholder="Email address" required autofocus>
+                <form method="post" action="/userCheck">
+                    <input type="email" class="form-control" name="Email" placeholder="Email address" required autofocus>
 
-                <input type="password"  class="form-control" placeholder="Password" required>
+                    <input type="password"  class="form-control" name="password" placeholder="Password" required>
 
-                <a class="btn btn-lg btn-block btn-signup" href="#" role="button">Sign in</a>
-                <p class="forgot_password"><a>Forgot your password?</a></p>
+                    <div class="form-actions">
+                        <button class="btn btn-lg btn-block btn-signup" type="submit" role="button">Sign in</button>
+                    </div>
+                    <p class="forgot_password"><a>Forgot your password?</a></p>
 
-                <div class="bottom_signIn">
-                    <p>Not registered yet? </p>
-                    <button class="btn btn-register" type="submit" onclick="ShowRegisterDiv(1)">Register</button>
-                </div>
+                    <div class="bottom_signIn">
+                        <p>Not registered yet? </p>
+                        <button class="btn btn-register" type="button" onclick="ShowRegisterDiv(1)">Register</button>
+                    </div>
+                </form>
             </div>
 
 
 
             <div id="SignUp" style="display: none;">
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                <form method="post" action="/addNewUser">
+                    <input type="email" id="inputEmail" name="Email" class="form-control" placeholder="Email address" required autofocus>
 
-                <div style="display: flex;justify-content: center;">
-                    <input type="text" id="firstname" class="form-control" placeholder="First Name" required style="margin-right: 1%;">
-                    <input type="text" id="lastname" class="form-control" placeholder="last Name" required style="margin-left: 1%;">
-                </div>
+                    <div style="display: flex;justify-content: center;">
+                        <input type="text" id="fullName" name="fullName" class="form-control" placeholder="Full Name" required style="margin-right: 1%;">
+                        <input type="tel" id="number" name="number" class="form-control" placeholder="Phone Number" size="8" required style="margin-left: 1%;">
+                    </div>
 
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-
-
-                <a class="btn btn-block btn-signup" href="#" role="button">Register</a>
-
-                <p class="privacy">By clicking this button, you agree to TraveLog's <a href="/">Privacy Policy</a>
-                    and <a href="/">Terms of Service</a><br>
-                </p>
+                    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
 
 
-                <div class="bottom_signIn">
-                    <p>Already have an account? </p>
-                    <button class="btn btn-register" type="submit" onclick="ShowRegisterDiv(2)">SignIn</button>
-                </div>
+                    <div class="form-actions">
+                        <button class="btn btn-block btn-signup" type="submit" role="button">Register</button>
+                    </div>
+
+                    <p class="privacy">By clicking this button, you agree to TraveLog's <a href="/">Privacy Policy</a>
+                        and <a href="#">Terms of Service</a><br>
+                    </p>
+
+
+                    <div class="bottom_signIn">
+                        <p>Already have an account? </p>
+                        <button class="btn btn-register" type="button" onclick="ShowRegisterDiv(2)">SignIn</button>
+                    </div>
+                </form>
             </div>
 
         </div>
