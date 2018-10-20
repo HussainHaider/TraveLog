@@ -6,19 +6,19 @@ var logger = require('morgan');
 var sassMiddleware = require('node-sass-middleware');
 var hbs = require('express-handlebars');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/userProfile');
-var exploreRouter = require('./routes/explore');
+var indexRouter = require('../routes/index');
+var usersRouter = require('../routes/userProfile');
+var exploreRouter = require('../routes/explore');
+
+const user = require('./controllers/user.js');
 var app = express();
 
 var firebase = require("firebase");
-var admin = require('firebase-admin');
 var session = require('express-session');
 
-var serviceAccount = require('./configuration/serviceAccountKey.json');
 
 
-var config = require('./configuration/config');
+var config = require('../configuration/config');
 firebase.initializeApp(config.firebase);
 var db = firebase.database();
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
@@ -28,7 +28,7 @@ var passport = require('passport')
 // view engine setup
 
 //app.engine('hbs', hbs({extname: 'hbs', defaultLayout: 'layout', layoutsDir: __dirname + '/views/layouts/'}));
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'hbs');
 
 app.use(passport.initialize());
@@ -43,7 +43,7 @@ app.use(sassMiddleware({
   indentedSyntax: true, // true = .sass and false = .scss
   sourceMap: true
 }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../public')));
 app.use(session({
     secret: 'sf54s84a846as684saf4s68f4afajk',
     resave: false,
@@ -74,17 +74,21 @@ app.post('/addNewUser',function (req, res) {
         });
 });
 
-app.post('/userCheck',function (req,res) {
-    console.log("Check-User");
-    firebase.auth().signInWithEmailAndPassword(req.body.Email,req.body.password)
-        .then(function(userRecord) {
-            // See the UserRecord reference doc for the contents of userRecord.
-            console.log("Successfully fetched user data:", userRecord.user.uid);
-        })
-        .catch(function(error) {
-            console.log("Error fetching user data:", error);
-        });
-});
+// app.post('/login',function (req,res) {
+//     console.log("Check-User");
+//     firebase.auth().signInWithEmailAndPassword(req.body.Email,req.body.password)
+//         .then(function(userRecord) {
+//             // See the UserRecord reference doc for the contents of userRecord.
+//             console.log("Successfully fetched user data:", userRecord.user.uid);
+//             res.render('Profile', { title: 'Profile | TraveLog',logo:'images/logo.jpg', anyArray: [1,2,3] });
+//         })
+//         .catch(function(error) {
+//             console.log("Error fetching user data:", error);
+//             res.render('index', { title: 'Login/Signup | TraveLog',logo:'images/logo.jpg',loginError: true,SignUpError: false });
+//         });
+// });
+
+app.post('/login', user.signin);
 
 // Passport session setup.
 passport.serializeUser(function(user, done) {
