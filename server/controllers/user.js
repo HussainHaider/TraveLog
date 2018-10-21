@@ -6,21 +6,20 @@ module.exports = {
     },
 
     signup: function(req, res) {
-        username = req.body.username;
-        email = req.body.email;
+        username = req.body.fullName;
+        email = req.body.Email;
         password = req.body.password;
+        phoneNumber=req.body.number;
 
-        model.addUser(username, email, password)
+        model.addUser(username, email, password,phoneNumber)
         .then((result) => {
-            res.status = 200;
-            res.json({});
+            req.session.user=result;
+            console.log("Successfully created new user:", result.uid);
+            res.redirect('/profile');
         })
         .catch((err) => {
-            res.status = 777;
-            res.json({
-                'message': 'Error Signing In',
-                'obj': err
-            });
+            console.log("Error creating new user:", err);
+            res.render('index', { title: 'Login/Signup | TraveLog',logo:'images/logo.jpg',loginError: false,SignUpError: true });
         });
     },
 
@@ -30,11 +29,12 @@ module.exports = {
 
         model.loginUser(email, password)
         .then((result) => {
-            console.log("SignedIn Successfully:", result);
+            console.log("SignedIn Successfully:", result.uid);
+            req.session.user=result;
             res.redirect('/profile');
         })
         .catch((err) => {
-            console.log("Error Signing In:");
+            console.log("Error Signing In:" + err);
             res.render('index', { title: 'Login/Signup | TraveLog',logo:'images/logo.jpg',loginError: true,SignUpError: false });
         });
     }

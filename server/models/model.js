@@ -5,40 +5,50 @@ var db;
 
 module.exports = {
   initialize: function() {
-      var config = require('../configuration/config');
+      var config = require('../../configuration/config');
       firebase.initializeApp(config.firebase);
-      var db = firebase.database();
+      db = firebase.database();
 
     console.log('model online');
   },
 
-  addUser: function(username, email, password) {
+  addUser: function(fullName,email, password,number) {
     return new Promise((resolve, reject) => {
-      admin.auth().createUser({
-        email: email,
-        emailVerified: false,
-        password: password,
-        displayName: username,
-        disabled: false
-      }).then(function(userRecord) {
-        resolve(userRecord);
-      }).catch(function(error) {
-        reject(error);
-      });
+      firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then(function(userRecord) {
+            // See the UserRecord reference doc for the contents of userRecord.
+            db.ref('users/' + userRecord.user.uid).set({
+                username: fullName,
+                email: email,
+                phoneNumber:number,
+            });
+            console.log("Successfully created new user:", userRecord.user.uid);
+            resolve({
+                userData: userRecord.user
+            })
+        })
+        .catch(function(error) {
+            console.log("Error creating new user:", error);
+            reject(error.code + error.message);
+        });
     });
   },
 
   loginUser: function(email, password) {
-    return new Promise((resolve, reject) => {
-      firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        reject(errorCode + errorMessage);
-      }).then((userRecord) => {
-        resolve({
-          userID:userRecord.user.uid,
-        })
+      return new Promise((resolve, reject) => {
+          firebase.auth().signInWithEmailAndPassword(email, password)
+              .then(function (userRecord) {
+                  // See the UserRecord reference doc for the contents of userRecord.
+                  console.log("Successfully fetched user data:", userRecord.user.uid);
+                  resolve({
+                      uid: userRecord.user.uid,
+                      email:userRecord.user.email
+                  })
+              })
+              .catch(function (error) {
+                  console.log("Error fetching user data:", error);
+                  reject(error.code + error.message);
+              });
       });
-    });
   }
 }

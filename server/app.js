@@ -18,9 +18,8 @@ var session = require('express-session');
 
 
 
-var config = require('../configuration/config');
-firebase.initializeApp(config.firebase);
-var db = firebase.database();
+ var config = require('../configuration/config');
+
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var passport = require('passport')
     , FacebookStrategy = require('passport-facebook').Strategy;
@@ -54,40 +53,10 @@ app.use(session({
 app.use('/', indexRouter);
 app.use('/profile', isAuthenticated, usersRouter);
 app.use('/explore', isAuthenticated, exploreRouter);
+user.initialize();
 
-app.post('/addNewUser',function (req, res) {
-    firebase.auth().createUserWithEmailAndPassword(req.body.Email, req.body.password)
-        .then(function(userRecord) {
-            // See the UserRecord reference doc for the contents of userRecord.
-            db.ref('users/' + userRecord.user.uid).set({
-                username: req.body.fullName,
-                email: req.body.Email,
-                phoneNumber:req.body.number,
-            });
-            req.session.user=userRecord.user;
-            console.log("Successfully created new user:", userRecord.user.uid);
-            res.redirect('/profile');
-        })
-        .catch(function(error) {
-            console.log("Error creating new user:", error);
-            res.render('index', { title: 'Login/Signup | TraveLog',logo:'images/logo.jpg',loginError: false,SignUpError: true });
-        });
-});
 
-// app.post('/login',function (req,res) {
-//     console.log("Check-User");
-//     firebase.auth().signInWithEmailAndPassword(req.body.Email,req.body.password)
-//         .then(function(userRecord) {
-//             // See the UserRecord reference doc for the contents of userRecord.
-//             console.log("Successfully fetched user data:", userRecord.user.uid);
-//             res.render('Profile', { title: 'Profile | TraveLog',logo:'images/logo.jpg', anyArray: [1,2,3] });
-//         })
-//         .catch(function(error) {
-//             console.log("Error fetching user data:", error);
-//             res.render('index', { title: 'Login/Signup | TraveLog',logo:'images/logo.jpg',loginError: true,SignUpError: false });
-//         });
-// });
-
+app.post('/signUp', user.signup);
 app.post('/login', user.signin);
 
 // Passport session setup.
@@ -134,6 +103,7 @@ app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'em
 
 app.get('/auth/google/callback',
     passport.authenticate('google', { successRedirect : '/profile',failureRedirect: '/' }));
+
 
 function isAuthenticated(req, res, next) {
     // do any checks you want to in here
