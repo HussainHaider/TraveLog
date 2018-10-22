@@ -10,7 +10,10 @@ var indexRouter = require('../routes/index');
 var usersRouter = require('../routes/userProfile');
 var exploreRouter = require('../routes/explore');
 
+// Controllers
 const user = require('./controllers/user.js');
+const userProfile = require('./controllers/userProfile.js');
+
 var app = express();
 
 var firebase = require("firebase");
@@ -48,16 +51,19 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     //cookie: { secure: true }
-}))
+}));
 
 app.use('/', indexRouter);
-app.use('/profile', isAuthenticated, usersRouter);
+app.use('/userProfile', isAuthenticated, usersRouter);
 app.use('/explore', isAuthenticated, exploreRouter);
 user.initialize();
 
 
 app.post('/signUp', user.signup);
 app.post('/login', user.signin);
+app.get('/profile', userProfile.getProfileDetails);
+app.post('/addDiary', userProfile.addUserDiary);
+
 
 // Passport session setup.
 passport.serializeUser(function(user, done) {

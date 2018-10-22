@@ -14,7 +14,7 @@ module.exports = {
         model.addUser(username, email, password,phoneNumber)
         .then((result) => {
             req.session.user=result;
-            console.log("Successfully created new user:", result.uid);
+            console.log("Successfully created new user:", result.userID);
             res.redirect('/profile');
         })
         .catch((err) => {
@@ -29,7 +29,7 @@ module.exports = {
 
         model.loginUser(email, password)
         .then((result) => {
-            console.log("SignedIn Successfully:", result.uid);
+            console.log("SignedIn Successfully:", result.userID +" "+ result.userName +" "+ result.userEmail);
             req.session.user=result;
             res.redirect('/profile');
         })
