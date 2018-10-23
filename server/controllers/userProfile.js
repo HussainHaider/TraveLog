@@ -14,6 +14,7 @@ module.exports = {
     },
 
     getProfileDetails: function(req, res) {
+        console.log("In Profile");
         res.render('Profile', { title: 'Profile | TraveLog',logo:'images/logo.jpg', anyArray: [1,2,3], session: req.session.user });
         // model.getUserProfile(email, password)
         // .then((result) => {

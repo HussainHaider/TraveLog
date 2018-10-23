@@ -128,6 +128,7 @@ passport.use(new GoogleStrategy({
     },
     function(token, tokenSecret, profile, done) {
         //profile.id,profile.displayName,profile.emails[0].value
+        console.log("Google profile" + profile);
         return done(null, profile);
     }
 ));
