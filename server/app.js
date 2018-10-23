@@ -87,8 +87,9 @@ user.initialize();
 
 app.post('/signUp', user.signup);
 app.post('/login', user.signin);
-app.get('/profile', userProfile.getProfileDetails);
-app.post('/addDiary', upload.single('image'), userProfile.addUserDiary);
+app.get('/profile',isAuthenticated, userProfile.getProfileDetails);
+app.get('/logOut', user.signOut);
+app.post('/addDiary',isAuthenticated, upload.single('image'), userProfile.addUserDiary);
 
 
 // Passport session setup.
@@ -142,7 +143,7 @@ function isAuthenticated(req, res, next) {
 
     // CHECK THE USER STORED IN SESSION FOR A CUSTOM VARIABLE
     // you can do this however you want with whatever variables you set up
-    if (req.session.user)
+    if (req.session.user!=null)
         return next();
 
     // IF A USER ISN'T LOGGED IN, THEN REDIRECT THEM SOMEWHERE

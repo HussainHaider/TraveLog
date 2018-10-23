@@ -61,6 +61,21 @@ module.exports = {
       });
   },
 
+    logoutUser:function(){
+        return new Promise((resolve, reject) => {
+            console.log("In logoutUser");
+            firebase.auth().signOut()
+                .then(function() {
+                    console.log("Sign-out successful.");
+                resolve("done!");
+            }).catch(function(error) {
+                // An error happened.
+                console.log("Error SignOut user data:", error);
+                reject(error.code + error.message);
+            });
+        });
+    },
+
     addDiary:function (title,Description,tripType,Link,userID) {
         return new Promise((resolve, reject) => {
 

@@ -28,14 +28,31 @@ module.exports = {
         password = req.body.password;
 
         model.loginUser(email, password)
-        .then((result) => {
-            console.log("SignedIn Successfully:", result.userID +" "+ result.userName +" "+ result.userEmail);
-            req.session.user=result;
-            res.redirect('/profile');
-        })
-        .catch((err) => {
-            console.log("Error Signing In:" + err);
-            res.render('index', { title: 'Login/Signup | TraveLog',logo:'images/logo.jpg',loginError: true,SignUpError: false });
-        });
+            .then((result) => {
+                console.log("SignedIn Successfully:", result.userID + " " + result.userName + " " + result.userEmail);
+                req.session.user = result;
+                res.redirect('/profile');
+            })
+            .catch((err) => {
+                console.log("Error Signing In:" + err);
+                res.render('index', {
+                    title: 'Login/Signup | TraveLog',
+                    logo: 'images/logo.jpg',
+                    loginError: true,
+                    SignUpError: false
+                });
+            });
+    },
+    signOut: function(req, res) {
+        model.logoutUser()
+            .then((result) => {
+                req.session.user=null;
+                console.log("Successfully SignOut:", result.userID);
+                res.redirect('/');
+            })
+            .catch((err) => {
+                console.log("Error SignOut user:", err);
+                res.redirect('/profile');
+            });
     }
 }
