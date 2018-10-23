@@ -85,6 +85,7 @@ app.use('/explore', isAuthenticated, exploreRouter);
 user.initialize();
 
 
+//Developer Routes
 app.post('/signUp', user.signup);
 app.post('/login', user.signin);
 app.get('/profile',isAuthenticated, userProfile.getProfileDetails);

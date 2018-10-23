@@ -133,3 +133,20 @@ module.exports = {
         });
     }
 };
+    },
+    showJournalDetail:function(itemID, tripType,userID){
+        return new Promise((resolve, reject) => {
+
+        });
+    },
+    deleteJournalDetail:function(itemID, tripType,userID){
+        return new Promise((resolve, reject) => {
+
+        });
+    },
+    editJournalDetail:function(itemID, tripType,userID){
+        return new Promise((resolve, reject) => {
+
+        });
+    },
+};
