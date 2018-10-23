@@ -55,5 +55,27 @@ module.exports = {
                     res.redirect('/profile');
                 });
         });
+    },
+    getUserProfileData: function(req, res) {
+        model.getProfileData(req.session.user.userID)
+            .then((result) => {
+                console.log("Successfully SignOut:", result.userID);
+                res.render('Settings', { title: 'Settings | TraveLog',logo:'../images/logo.jpg',updateError:false });
+            })
+            .catch((err) => {
+                console.log("Error SignOut user:", err);
+                res.redirect('/profile');
+            });
+    },
+    editUserProfileData: function(req, res) {
+        model.updateProfileData(req.body.name,req.body.email,req.body.number,req.body.age,req.body.city,req.body.country,req.session.user.userID)
+            .then((result) => {
+                res.render('Settings', { title: 'Settings | TraveLog',logo:'../images/logo.jpg',updateError:false });
+                res.redirect('/profile');
+            })
+            .catch((err) => {
+                console.log("Error SignOut user:", err);
+                res.render('Settings', { title: 'Settings | TraveLog',logo:'../images/logo.jpg',updateError:true });
+            });
     }
-}
+};

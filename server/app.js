@@ -88,16 +88,20 @@ user.initialize();
 app.post('/signUp', user.signup);
 app.post('/login', user.signin);
 app.get('/profile',isAuthenticated, userProfile.getProfileDetails);
+app.get('/settings',isAuthenticated, userProfile.getUserProfileData);
+app.post('/editProfile',isAuthenticated, userProfile.editUserProfileData);
 app.get('/logOut', user.signOut);
 app.post('/addDiary',isAuthenticated, upload.single('image'), userProfile.addUserDiary);
 
 
 // Passport session setup.
 passport.serializeUser(function(user, done) {
+    console.log('serializeUser');
     done(null, user);
 });
 
 passport.deserializeUser(function(obj, done) {
+    console.log('deserializeUser');
     done(null, obj);
 });
 
@@ -128,7 +132,7 @@ passport.use(new GoogleStrategy({
     },
     function(token, tokenSecret, profile, done) {
         //profile.id,profile.displayName,profile.emails[0].value
-        console.log("Google profile" + profile);
+        console.log("Google profile" + JSON.stringify(profile));
         return done(null, profile);
     }
 ));

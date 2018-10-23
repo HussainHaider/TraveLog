@@ -90,5 +90,15 @@ module.exports = {
             console.log("In addDiary");
             resolve();
         });
+    },
+    getProfileData(UserID){
+        return new Promise((resolve, reject) => {
+
+        });
+    },
+    updateProfileData(name,email,number,age,city,country,UserID){
+        return new Promise((resolve, reject) => {
+
+        });
     }
-}
+};
