@@ -27,6 +27,32 @@ var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var passport = require('passport')
     , FacebookStrategy = require('passport-facebook').Strategy;
 
+
+var cloudinary = require('cloudinary');
+var multer = require('multer');
+
+var storage = multer.diskStorage({
+    filename: function(req, file, callback) {
+        callback(null, Date.now() + file.originalname);
+    }
+});
+var imageFilter = function (req, file, cb) {
+    // accept image files only
+    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
+        return cb(new Error('Only image files are allowed!'), false);
+    }
+    cb(null, true);
+};
+var upload = multer({ storage: storage, fileFilter: imageFilter});
+
+cloudinary.config({
+    cloud_name: 'hussain-imagestorage',
+    api_key: '826587816326516',
+    api_secret: 'UhhqwZ47HbpaL5D9snn-jqZ-CwM'
+});
+
+
+
 // view engine setup
 
 //app.engine('hbs', hbs({extname: 'hbs', defaultLayout: 'layout', layoutsDir: __dirname + '/views/layouts/'}));
@@ -62,7 +88,7 @@ user.initialize();
 app.post('/signUp', user.signup);
 app.post('/login', user.signin);
 app.get('/profile', userProfile.getProfileDetails);
-app.post('/addDiary', userProfile.addUserDiary);
+app.post('/addDiary', upload.single('image'), userProfile.addUserDiary);
 
 
 // Passport session setup.

@@ -108,7 +108,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" action="/addDiary" role="form">
+                <form method="post" action="/addDiary" role="form" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="TitleInput">Title</label>
                         <input type="text" name="title" class="form-control" id="TitleInput"  aria-describedby="TitleInput">
@@ -130,7 +130,7 @@
 
                     <div class="form-group">
                         <label for="filevalue">Add Picture or Video</label>
-                        <input type="file" class="btn" id="filevalue" name="uploadFile">
+                        <input type="file" class="btn" id="image" name="image" accept="image/*" >
                     </div>
 
                     <!--<div style="margin-bottom: 2%;">-->

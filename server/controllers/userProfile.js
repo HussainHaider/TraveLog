@@ -1,4 +1,12 @@
 const model = require('../models/model.js');
+const cloudinary = require('cloudinary');
+
+cloudinary.config({
+    cloud_name: 'hussain-imagestorage',
+    api_key: '826587816326516',
+    api_secret: 'UhhqwZ47HbpaL5D9snn-jqZ-CwM'
+});
+
 
 module.exports = {
     initialize: function() {
@@ -32,15 +40,19 @@ module.exports = {
         console.log("tripType" + tripType);
         console.log("uploadFile" + uploadFile);
 
+        cloudinary.uploader.upload(req.file.path, function(result) {
+            // add cloudinary url for the image to the campground object under image property
+            console.log('URL:' + result.secure_url);
 
-        model.addDiary(title,Description,tripType,uploadFile,req.session.user.userID)
-            .then((result) => {
-                console.log("Done!!" + result);
-                res.redirect('/profile');
-            })
-            .catch((err) => {
-                console.log("Cancel!!" + err);
-                res.redirect('/profile');
-            });
+            model.addDiary(title,Description,tripType,result.secure_url,req.session.user.userID)
+                .then((result) => {
+                    console.log("Done!!" + result);
+                    res.redirect('/profile');
+                })
+                .catch((err) => {
+                    console.log("Cancel!!" + err);
+                    res.redirect('/profile');
+                });
+        });
     }
 }
