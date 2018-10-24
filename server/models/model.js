@@ -162,6 +162,22 @@ module.exports = {
     showJournalDetail:function(itemID, tripType,userID){
         return new Promise((resolve, reject) => {
 
+            if(tripType===1){
+
+            } else if (tripType===2){
+
+            } else if (tripType===3){
+
+            }
+
+
+            db.ref('Diary/Out of State Trips/' + userID)
+                .on('value', function(snapshot) {
+
+                    resolve({
+                        data:snapshot.val()
+                    });
+                });
         });
     },
     deleteJournalDetail:function(itemID, tripType,userID){

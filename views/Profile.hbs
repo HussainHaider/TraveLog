@@ -70,11 +70,11 @@
                 {{#each Type1}}
                 <div class="col-md-4 mb-4">
                     <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="{{ Link }}" alt="Card image cap">
+                        <img class="card-img-top" src="{{ Link }}" alt="Card image cap" height="170">
                         <div class="card-body">
                             <h5 class="card-title" style="text-align: center">{{ Title }}</h5>
                             <div style="text-align: center">
-                                <a href="/profile/profileJournal" class="btn btn-primary">Show</a>
+                                <a href="/showJournal/1/{{ @key }}" class="btn btn-primary">Show</a>
                                 <a href="#" class="btn btn-color">Edit</a>
                                 <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#DeleteModal">Delete</a>
                             </div>
@@ -96,7 +96,7 @@
                 {{#each Type2}}
                     <div class="col-md-4 mb-4">
                         <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="{{ Link }}" alt="Card image cap">
+                            <img class="card-img-top" src="{{ Link }}" alt="Card image cap" height="170">
                             <div class="card-body">
                                 <h5 class="card-title" style="text-align: center">{{ Title }}</h5>
                                 <div style="text-align: center">
@@ -122,7 +122,7 @@
                 {{#each Type3}}
                     <div class="col-md-4 mb-4">
                         <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="{{ Link }}" alt="Card image cap">
+                            <img class="card-img-top" src="{{ Link }}" alt="Card image cap" height="170">
                             <div class="card-body">
                                 <h5 class="card-title" style="text-align: center">{{ Title }}</h5>
                                 <div style="text-align: center">

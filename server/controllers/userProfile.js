@@ -18,7 +18,6 @@ module.exports = {
         model.getUserProfile(req.session.user.userID)
         .then((result) => {
             console.log("Profile Detail_1 :"+ JSON.stringify(result.tripType_1));
-            console.log("Profile Detail_2 :"+ JSON.stringify(result.tripType_2));
             res.render('Profile', { title: 'Profile | TraveLog',logo:'images/logo.jpg', session: req.session.user,Type1:result.tripType_1,Type2:result.tripType_2,Type3:result.tripType_3 });
         })
         .catch((err) => {
@@ -61,7 +60,7 @@ module.exports = {
         model.getProfileData(req.session.user.userID)
             .then((result) => {
                 console.log("Successfully read User Data:", result);
-                res.render('Settings', { title: 'Settings | TraveLog',logo:'../images/logo.jpg',updateError:false,Data:result.data });
+                res.render('Settings', { title: 'Settings | TraveLog',logo:'/images/logo.jpg',updateError:false,Data:result.data });
             })
             .catch((err) => {
                 console.log("Error reading User Data user:", err);
@@ -71,12 +70,12 @@ module.exports = {
     editUserProfileData: function(req, res) {
         model.updateProfileData(req.body.name,req.body.email,req.body.number,req.body.age,req.body.city,req.body.country,req.session.user.userID)
             .then((result) => {
-                res.render('Settings', { title: 'Settings | TraveLog',logo:'../images/logo.jpg',updateError:false });
+                res.render('Settings', { title: 'Settings | TraveLog',logo:'/images/logo.jpg',updateError:false });
                 res.redirect('/profile');
             })
             .catch((err) => {
                 console.log("Error update user:", err);
-                res.render('Settings', { title: 'Settings | TraveLog',logo:'../images/logo.jpg',updateError:true });
+                res.render('Settings', { title: 'Settings | TraveLog',logo:'/images/logo.jpg',updateError:true });
             });
     }
 };

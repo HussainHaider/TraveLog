@@ -93,9 +93,9 @@ app.get('/profile',isAuthenticated, userProfile.getProfileDetails);
 app.get('/settings',isAuthenticated, userProfile.getUserProfileData);
 app.post('/editProfile',isAuthenticated, userProfile.editUserProfileData);
 app.get('/logOut',isAuthenticated, user.signOut);
-app.get('/showJournal/:id/:tripType',isAuthenticated, userJournal.showUserJournal);
-app.get('/editJournal/:id/:tripType',isAuthenticated, userJournal.editUserJournal);
-app.get('/deleteJournal/:id/:tripType',isAuthenticated, userJournal.deleteUserJournal);
+app.get('/showJournal/:tripType/:id',isAuthenticated, userJournal.showUserJournal);
+app.get('/editJournal/:tripType/:id',isAuthenticated, userJournal.editUserJournal);
+app.get('/deleteJournal/:tripType/:id',isAuthenticated, userJournal.deleteUserJournal);
 app.post('/addDiary',isAuthenticated, upload.single('image'), userProfile.addUserDiary);
 
 

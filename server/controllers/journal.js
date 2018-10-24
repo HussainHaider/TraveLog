@@ -6,12 +6,16 @@ module.exports = {
     },
 
     showUserJournal: function(req, res) {
-        itemID = req.body.fullName;
-        tripType = req.body.fullName;
+        itemID = req.params.id;
+        tripType = req.params.tripType;
+
+        console.log("itemID: "+itemID);
+        console.log("tripType: "+tripType);
 
         model.showJournalDetail(itemID, tripType,req.session.user.userID)
         .then((result) => {
-            res.render('profileJournal', { title: 'Journal Name | TraveLog',logo:'../images/logo.jpg' });
+            console.log("Fired");
+            res.render('profileJournal', { title: 'Journal Name | TraveLog',logo:'/images/logo.jpg' });
         })
         .catch((err) => {
             console.log("Cancel!!" + err);
