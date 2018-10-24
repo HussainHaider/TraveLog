@@ -13,6 +13,7 @@ var exploreRouter = require('../routes/explore');
 // Controllers
 const user = require('./controllers/user.js');
 const userProfile = require('./controllers/userProfile.js');
+const userJournal = require('./controllers/journal.js');
 
 var app = express();
 
@@ -91,7 +92,10 @@ app.post('/login', user.signin);
 app.get('/profile',isAuthenticated, userProfile.getProfileDetails);
 app.get('/settings',isAuthenticated, userProfile.getUserProfileData);
 app.post('/editProfile',isAuthenticated, userProfile.editUserProfileData);
-app.get('/logOut', user.signOut);
+app.get('/logOut',isAuthenticated, user.signOut);
+app.get('/showJournal/:id/:tripType',isAuthenticated, userJournal.showUserJournal);
+app.get('/editJournal/:id/:tripType',isAuthenticated, userJournal.editUserJournal);
+app.get('/deleteJournal/:id/:tripType',isAuthenticated, userJournal.deleteUserJournal);
 app.post('/addDiary',isAuthenticated, upload.single('image'), userProfile.addUserDiary);
 
 
