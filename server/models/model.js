@@ -132,6 +132,16 @@ module.exports = {
 
         });
     },
+    getUserProfile:function(userID){
+        return new Promise((resolve, reject) => {
+            db.ref('Diary/Within City Trips' + userID)
+                .on('value', function(snapshot) {
+                    resolve({
+                        data:snapshot.val()
+                    });
+            });
+        });
+    },
     showJournalDetail:function(itemID, tripType,userID){
         return new Promise((resolve, reject) => {
 

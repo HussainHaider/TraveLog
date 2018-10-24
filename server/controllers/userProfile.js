@@ -15,18 +15,18 @@ module.exports = {
 
     getProfileDetails: function(req, res) {
         console.log("In Profile");
-        res.render('Profile', { title: 'Profile | TraveLog',logo:'images/logo.jpg', anyArray: [1,2,3], session: req.session.user });
-        // model.getUserProfile(email, password)
-        // .then((result) => {
-        //     res.redirect('/profile');
-        // })
-        // .catch((err) => {
-        //     console.log("Error Signing In:" + err);
-        //     res.json({
-        //         'message': 'Error getting Profile',
-        //         'obj': err
-        //     });
-        // });
+        model.getUserProfile(req.session.user.userID)
+        .then((result) => {
+            console.log("Profile Detail :"+ result);
+            res.render('Profile', { title: 'Profile | TraveLog',logo:'images/logo.jpg', anyArray: [1,2,3], session: req.session.user });
+        })
+        .catch((err) => {
+            console.log("Error Signing In:" + err);
+            res.json({
+                'message': 'Error getting Profile',
+                'obj': err
+            });
+        });
     },
 
 
