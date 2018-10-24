@@ -93,11 +93,42 @@ module.exports = {
     },
     getProfileData(UserID){
         return new Promise((resolve, reject) => {
+            db.ref('/users/' + UserID).once('value')
+                .then(function(snapshot) {
+                    resolve({
+                        data:snapshot.val()
+                    });
+                })
+                .catch(function (err) {
+                    console.log('unable to read User Profile Data ');
+                    reject(err.code + err.message);
+                })
 
         });
     },
     updateProfileData(name,email,number,age,city,country,UserID){
         return new Promise((resolve, reject) => {
+
+            var postData = {
+                email: email,
+                phoneNumber: number,
+                username: name,
+                age: age,
+                city: city,
+                country: country
+            };
+
+            var updates = {};
+            updates['/users/' + UserID] = postData;
+
+            db.ref().update(updates)
+                .then(function() {
+                    resolve();
+                })
+                .catch(function (err) {
+                    console.log('unable to Update User Profile Data ');
+                    reject(err.code + err.message);
+                })
 
         });
     }

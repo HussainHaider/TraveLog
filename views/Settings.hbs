@@ -43,33 +43,33 @@
                 <form method="post" action="/editProfile">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp">
+                        <input type="text" class="form-control" id="name" name="name" value={{ Data.username }} aria-describedby="emailHelp">
                     </div>
 
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" name="email">
+                        <input type="email" class="form-control" id="email" name="email"  value={{ Data.email }}>
                     </div>
 
                     <div class="form-group">
                         <label for="number">Phone number</label>
-                        <input type="text" class="form-control" id="number" name="number">
+                        <input type="text" class="form-control" id="number" name="number" value={{ Data.phoneNumber }}>
                     </div>
 
                     <div class="form-group">
                         <label for="age">Age</label>
-                        <input type="email" class="form-control" id="age" name="age">
+                        <input type="number" class="form-control" id="age" name="age" value={{ Data.age }}>
                     </div>
 
 
                     <div class="form-group">
                         <label for="city">Place you live</label>
-                        <input type="email" class="form-control" id="city" name="city">
+                        <input type="text" class="form-control" id="city" name="city" value={{ Data.city }}>
                     </div>
 
                     <div class="form-group">
                         <label for="Country">Country</label>
-                        <input type="email" class="form-control" id="Country" name="country">
+                        <input type="text" class="form-control" id="Country" name="country" value={{ Data.country }}>
                     </div>
 
                     <button type="submit" class="btn btn-color">Update Profile</button>

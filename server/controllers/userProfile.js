@@ -59,11 +59,11 @@ module.exports = {
     getUserProfileData: function(req, res) {
         model.getProfileData(req.session.user.userID)
             .then((result) => {
-                console.log("Successfully SignOut:", result.userID);
-                res.render('Settings', { title: 'Settings | TraveLog',logo:'../images/logo.jpg',updateError:false });
+                console.log("Successfully read User Data:", result);
+                res.render('Settings', { title: 'Settings | TraveLog',logo:'../images/logo.jpg',updateError:false,Data:result.data });
             })
             .catch((err) => {
-                console.log("Error SignOut user:", err);
+                console.log("Error reading User Data user:", err);
                 res.redirect('/profile');
             });
     },
@@ -74,7 +74,7 @@ module.exports = {
                 res.redirect('/profile');
             })
             .catch((err) => {
-                console.log("Error SignOut user:", err);
+                console.log("Error update user:", err);
                 res.render('Settings', { title: 'Settings | TraveLog',logo:'../images/logo.jpg',updateError:true });
             });
     }
