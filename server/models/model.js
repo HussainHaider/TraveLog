@@ -134,12 +134,29 @@ module.exports = {
     },
     getUserProfile:function(userID){
         return new Promise((resolve, reject) => {
-            db.ref('Diary/Within City Trips' + userID)
+            var tripType_1 = {},tripType_2= {},tripType_3= {};
+
+             db.ref('Diary/Within City Trips/' + userID)
                 .on('value', function(snapshot) {
+                    tripType_1=snapshot.val()
+                });
+
+             db.ref('Diary/Out of City Trips/' + userID)
+                .on('value', function(snapshot) {
+                    tripType_2=snapshot.val();
+                });
+
+            db.ref('Diary/Out of State Trips/' + userID)
+                .on('value', function(snapshot) {
+                    tripType_3=snapshot.val();
+
                     resolve({
-                        data:snapshot.val()
+                        tripType_1:tripType_1,
+                        tripType_2:tripType_2,
+                        tripType_3:tripType_3
                     });
-            });
+                });
+
         });
     },
     showJournalDetail:function(itemID, tripType,userID){

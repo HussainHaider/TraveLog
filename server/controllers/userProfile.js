@@ -17,8 +17,9 @@ module.exports = {
         console.log("In Profile");
         model.getUserProfile(req.session.user.userID)
         .then((result) => {
-            console.log("Profile Detail :"+ result);
-            res.render('Profile', { title: 'Profile | TraveLog',logo:'images/logo.jpg', anyArray: [1,2,3], session: req.session.user });
+            console.log("Profile Detail_1 :"+ JSON.stringify(result.tripType_1));
+            console.log("Profile Detail_2 :"+ JSON.stringify(result.tripType_2));
+            res.render('Profile', { title: 'Profile | TraveLog',logo:'images/logo.jpg', session: req.session.user,Type1:result.tripType_1,Type2:result.tripType_2,Type3:result.tripType_3 });
         })
         .catch((err) => {
             console.log("Error Signing In:" + err);

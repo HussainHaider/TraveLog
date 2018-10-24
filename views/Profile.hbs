@@ -66,33 +66,13 @@
     </div>
     <div class="container" id="Trips_Div_1">
         <div class="row">
-            {{#each anyArray}}
-            <div class="col-md-4 mb-4">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="./images/_full.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title" style="text-align: center">Journal title</h5>
-                        <div style="text-align: center">
-                            <a href="/profile/profileJournal" class="btn btn-primary">Show</a>
-                            <a href="#" class="btn btn-color">Edit</a>
-                            <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#DeleteModal">Delete</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {{/each}}
-
-        </div>
-    </div>
-
-    <div class="container" id="Trips_Div_2" style="display: none;">
-        <div class="row">
-            {{#each anyArray}}
+            {{#if Type1}}
+                {{#each Type1}}
                 <div class="col-md-4 mb-4">
                     <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="./images/_full.jpg" alt="Card image cap">
+                        <img class="card-img-top" src="{{ Link }}" alt="Card image cap">
                         <div class="card-body">
-                            <h5 class="card-title" style="text-align: center">Journal title_2</h5>
+                            <h5 class="card-title" style="text-align: center">{{ Title }}</h5>
                             <div style="text-align: center">
                                 <a href="/profile/profileJournal" class="btn btn-primary">Show</a>
                                 <a href="#" class="btn btn-color">Edit</a>
@@ -101,16 +81,64 @@
                         </div>
                     </div>
                 </div>
-            {{/each}}
+                {{/each}}
+            {{else}}
+                <div class="col-md-12 mb-4" style="text-align: center">
+                    <h1 style="color: firebrick">No Record Found</h1>
+                </div>
+            {{/if}}
+        </div>
+    </div>
 
+    <div class="container" id="Trips_Div_2" style="display: none;">
+        <div class="row">
+            {{#if Type2}}
+                {{#each Type2}}
+                    <div class="col-md-4 mb-4">
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="{{ Link }}" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title" style="text-align: center">{{ Title }}</h5>
+                                <div style="text-align: center">
+                                    <a href="/profile/profileJournal" class="btn btn-primary">Show</a>
+                                    <a href="#" class="btn btn-color">Edit</a>
+                                    <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#DeleteModal">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+            {{else}}
+                <div class="col-md-12 mb-4" style="text-align: center">
+                    <h1 style="color: firebrick">No Record Found</h1>
+                </div>
+            {{/if}}
         </div>
     </div>
 
     <div class="container" id="Trips_Div_3" style="display: none;">
         <div class="row">
-            <div class="col-md-12 mb-4" style="text-align: center">
-                <h1 style="color: firebrick">No Record Found</h1>
-            </div>
+            {{#if Type3}}
+                {{#each Type3}}
+                    <div class="col-md-4 mb-4">
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="{{ Link }}" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title" style="text-align: center">{{ Title }}</h5>
+                                <div style="text-align: center">
+                                    <a href="/profile/profileJournal" class="btn btn-primary">Show</a>
+                                    <a href="#" class="btn btn-color">Edit</a>
+                                    <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#DeleteModal">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+            {{else}}
+                <div class="col-md-12 mb-4" style="text-align: center">
+                    <h1 style="color: firebrick">No Record Found</h1>
+                </div>
+            {{/if}}
         </div>
     </div>
 
@@ -150,7 +178,7 @@
 
                     <div class="form-group">
                         <label for="filevalue">Add Picture or Video</label>
-                        <input type="file" class="btn" id="image" name="image" accept="image/*" >
+                        <input type="file" class="btn" id="image" name="image" accept="image/*,video/*" >
                     </div>
 
                     <!--<div style="margin-bottom: 2%;">-->
