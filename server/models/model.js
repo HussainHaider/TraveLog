@@ -131,8 +131,6 @@ module.exports = {
                 })
 
         });
-    }
-};
     },
     showJournalDetail:function(itemID, tripType,userID){
         return new Promise((resolve, reject) => {

@@ -19,7 +19,14 @@ function ShowTrips(id) {
 
     var element = document.querySelector(".active_box");
     element.classList.remove("active_box");
+
+    var element2 = document.querySelector(".box-style");
+    element2.classList.remove("box-style");
+
     document.getElementById(heading_ID).classList.add("active_box");
+
+    document.getElementById(heading_ID).firstElementChild.classList.add("box-style");
+
     for(var i=1;i<=3;i++){
         var tempID="Trips_Div_"+i;
         //console.log("tempID: "+tempID);
