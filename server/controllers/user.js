@@ -46,7 +46,7 @@ module.exports = {
     signOut: function(req, res) {
         model.logoutUser()
             .then((result) => {
-                req.session.user=null;
+                req.session=null;
                 console.log("Successfully SignOut:", result.userID);
                 res.redirect('/');
             })
