@@ -9,8 +9,8 @@ module.exports = {
         itemID = req.params.id;
         tripType = req.params.tripType;
 
-        console.log("itemID: "+itemID);
-        console.log("tripType: "+typeof(tripType));
+        // console.log("itemID: "+itemID);
+        // console.log("tripType: "+typeof(tripType));
 
         let TypeOfTrip;
         if(tripType==='1'){
@@ -32,10 +32,20 @@ module.exports = {
         });
     },
     deleteUserJournal: function(req, res) {
-        itemID = req.body.fullName;
-        tripType = req.body.fullName;
+        itemID = req.params.id;
+        tripType = req.params.tripType;
 
-        model.deleteJournalDetail(itemID, tripType,req.session.user.userID)
+        let TypeOfTrip;
+        if(tripType==='1'){
+            TypeOfTrip="Within City Trips";
+        } else if (tripType==='2'){
+            TypeOfTrip="Out of City Trips";
+        } else if (tripType==='3'){
+            TypeOfTrip="Out of State Trips";
+        }
+
+
+        model.deleteJournalDetail(itemID, TypeOfTrip,req.session.user.userID)
             .then((result) => {
                 res.redirect('/profile');
             })
@@ -45,8 +55,8 @@ module.exports = {
             });
     },
     editUserJournal: function(req, res) {
-        itemID = req.body.fullName;
-        tripType = req.body.fullName;
+        itemID = req.params.id;
+        tripType = req.params.tripType;
 
         model.editJournalDetail(itemID, tripType,req.session.user.userID)
             .then((result) => {

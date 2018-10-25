@@ -36,6 +36,14 @@ function ShowTrips(id) {
     document.getElementById(div_ID).style.display = "block";
 }
 
+$('#DeleteModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget);
+    var recipient = button.data('whatever');
+
+
+    var modal = $(this)
+    modal.find('.modal-footer a').attr("href", recipient);
+})
 
 // function showTripsDiv() {
 //     document.getElementById("loader").style.display = "none";

@@ -159,12 +159,12 @@ module.exports = {
 
         });
     },
-    showJournalDetail:function(itemID, Type,userID){
+    showJournalDetail:function(itemID, tripType,userID){
         return new Promise((resolve, reject) => {
 
 
-            console.log("Route:" + 'Diary/'+ Type +'/' + userID+'/' + itemID);
-            db.ref('Diary/'+ Type +'/' + userID+'/' + itemID)
+            //console.log("Route:" + 'Diary/'+ Type +'/' + userID+'/' + itemID);
+            db.ref('Diary/'+ tripType +'/' + userID+'/' + itemID)
                 .on('value', function(snapshot) {
                     resolve({
                         data:snapshot.val()
@@ -175,6 +175,15 @@ module.exports = {
     deleteJournalDetail:function(itemID, tripType,userID){
         return new Promise((resolve, reject) => {
 
+            console.log("Route:" + 'Diary/'+ tripType +'/' + userID+'/' + itemID);
+            db.ref('Diary/'+ tripType +'/' + userID+'/' + itemID)
+                .remove().then(function () {
+                    console.log("Item Deleted");
+                    resolve();
+            }).catch(function () {
+                console.log("Item not Deleted");
+                reject();
+            })
         });
     },
     editJournalDetail:function(itemID, tripType,userID){
