@@ -88,7 +88,7 @@ user.initialize();
 
 // Passport session setup.
 passport.serializeUser(function(user, done) {
-    console.log('serializeUser');
+    console.log('serializeUser: ' + JSON.stringify(user));
     done(null, user);
 });
 
