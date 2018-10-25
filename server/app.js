@@ -147,8 +147,8 @@ passport.use(new FacebookStrategy({
                         return done(null, false);
                     })
             })
-            .catch((err) => {
-                console.log("Error creating new user:", err);
+            .catch(() => {
+                console.log("Error creating new user through facebook");
                 return done(null, false);
             });
     }
@@ -179,8 +179,8 @@ passport.use(new GoogleStrategy({
                         return done(null, false);
                     })
             })
-            .catch((err) => {
-                console.log("Error creating new user:", err);
+            .catch(() => {
+                console.log("Error creating new user Google");
                 return done(null, false);
             });
     }

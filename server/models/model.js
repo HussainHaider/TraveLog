@@ -194,6 +194,7 @@ module.exports = {
 
     checkUserByFB_Google: function(email) {
         return new Promise((resolve, reject) => {
+            let flag=false;
             db.ref('users/').once('value', function(snapshot) {
                 snapshot.forEach(function(childSnapshot) {
                     childSnapshot.forEach(function (grandChild) {
@@ -201,10 +202,15 @@ module.exports = {
                             console.log('Data '+grandChild.val());
                             if(grandChild.val()===email){
                                 reject();
+                            } else {
+                                flag=true;
                             }
                         }
                     });
                 });
+                if(flag===true){
+                    resolve();
+                }
             });
         });
     },
