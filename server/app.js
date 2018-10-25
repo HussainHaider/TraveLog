@@ -124,8 +124,8 @@ passport.use(new FacebookStrategy({
         profileFields: ['id', 'first_name', 'last_name', 'email']
     },
     function(accessToken, refreshToken, profile, done) {
-        console.log('profile email:' + JSON.stringify(profile['email']));
-        console.log('profile:' + JSON.stringify(profile));
+        console.log('profile email:' + JSON.stringify(profile['emails'][0]['value']));
+        console.log('profile name:' + JSON.stringify(profile['name']['givenName'] +" "+ profile['name']['familyName']));
 
         // var newUser={};
         // newUser.user={
