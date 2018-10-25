@@ -191,4 +191,28 @@ module.exports = {
 
         });
     },
+
+    addUserByFB_Google: function(fullName,email,id) {
+        return new Promise((resolve, reject) => {
+            db.ref('users/').once('value', function(snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                    console.log('KEY '+childSnapshot.key);
+                    console.log('Data '+childSnapshot.val());
+                    resolve();
+                });
+            });
+
+
+
+
+            // db.ref('users/' + id).set({
+            //     username: fullName,
+            //     email: email
+            // }).then(function () {
+            //     resolve();
+            // }).catch(function () {
+            //     reject();
+            // })
+        });
+    },
 };

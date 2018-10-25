@@ -154,8 +154,8 @@ passport.use(new GoogleStrategy({
             userID:profile['id'],
             userName: profile['displayName'],
             userEmail:profile['emails'][0]['value']
-        };
-
+        }; 
+        addUserByFB_Google(newUser.userName,newUser.userEmail,newUser.userID);
 
         return done(null, newUser);
     }
