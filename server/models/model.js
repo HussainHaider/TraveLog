@@ -196,8 +196,10 @@ module.exports = {
         return new Promise((resolve, reject) => {
             db.ref('users/').once('value', function(snapshot) {
                 snapshot.forEach(function(childSnapshot) {
-                    console.log('KEY '+childSnapshot.key);
-                    console.log('Data '+childSnapshot.val());
+                    childSnapshot.forEach(function (grandChild) {
+                        console.log('KEY '+grandChild.key);
+                        console.log('Data '+grandChild.val());
+                    });
                     resolve();
                 });
             });
