@@ -85,6 +85,17 @@ app.use('/userProfile', isAuthenticated, usersRouter);
 app.use('/explore', isAuthenticated, exploreRouter);
 user.initialize();
 
+// Passport session setup.
+passport.serializeUser(function(user, done) {
+    console.log('serializeUser');
+    done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+    console.log('deserializeUser');
+    done(null, obj);
+});
+
 
 //Developer Routes
 app.post('/signUp', user.signup);
@@ -97,18 +108,13 @@ app.get('/showJournal/:tripType/:id',isAuthenticated, userJournal.showUserJourna
 app.get('/editJournal/:tripType/:id',isAuthenticated, userJournal.editUserJournal);
 app.get('/deleteJournal/:tripType/:id',isAuthenticated, userJournal.deleteUserJournal);
 app.post('/addDiary',isAuthenticated, upload.single('image'), userProfile.addUserDiary);
-
-
-// Passport session setup.
-passport.serializeUser(function(user, done) {
-    console.log('serializeUser');
-    done(null, user);
-});
-
-passport.deserializeUser(function(obj, done) {
-    console.log('deserializeUser');
-    done(null, obj);
-});
+app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email'] }));
+app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', { successRedirect: '/profile',
+        failureRedirect: '/' }));
+app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+app.get('/auth/google/callback',
+    passport.authenticate('google', { successRedirect : '/profile',failureRedirect: '/' }));
 
 // Use the FacebookStrategy within Passport.
 passport.use(new FacebookStrategy({
@@ -118,17 +124,12 @@ passport.use(new FacebookStrategy({
         profileFields: ['id', 'first_name', 'last_name', 'email']
     },
     function(accessToken, refreshToken, profile, done) {
-        console.log('profile' + JSON.stringify(profile));
+        console.log('profile' + JSON.stringify(profile['id']));
         //profile.id,profile.name(profile.name.givenName),profile.emails[0].value
         return done(null, profile);
     }
 ));
 
-app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email'] }));
-
-app.get('/auth/facebook/callback',
-    passport.authenticate('facebook', { successRedirect: '/profile',
-        failureRedirect: '/' }));
 
 passport.use(new GoogleStrategy({
         clientID: config.googleAuth.CLIENT_ID,
@@ -142,10 +143,7 @@ passport.use(new GoogleStrategy({
     }
 ));
 
-app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
-app.get('/auth/google/callback',
-    passport.authenticate('google', { successRedirect : '/profile',failureRedirect: '/' }));
 
 
 function isAuthenticated(req, res, next) {
