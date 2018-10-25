@@ -159,21 +159,13 @@ module.exports = {
 
         });
     },
-    showJournalDetail:function(itemID, tripType,userID){
+    showJournalDetail:function(itemID, Type,userID){
         return new Promise((resolve, reject) => {
 
-            if(tripType===1){
 
-            } else if (tripType===2){
-
-            } else if (tripType===3){
-
-            }
-
-
-            db.ref('Diary/Out of State Trips/' + userID)
+            console.log("Route:" + 'Diary/'+ Type +'/' + userID+'/' + itemID);
+            db.ref('Diary/'+ Type +'/' + userID+'/' + itemID)
                 .on('value', function(snapshot) {
-
                     resolve({
                         data:snapshot.val()
                     });

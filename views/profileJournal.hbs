@@ -33,33 +33,37 @@
     </nav>
 </header>
 <div class="content">
+
     <div class="container-fluid general_header">
         <div class="row">
             <div class="col-md-12">
                 <div class="data-col">
-                    <p>User Name</p>
+                    <p>{{ session.userName }}</p>
                     <p></p>
-                    <h1>Journal Name</h1>
+                    {{#data}}
+                    <h1>{{ Title }}</h1>
+                    {{/data}}
                 </div>
             </div>
         </div>
     </div>
     <div class="container-fluid">
         <div class="row">
+            {{#data}}
             <div class="col-md-6" style="padding: 3%; box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);">
                 <div class="card" style="width: 38rem;">
-                    <img class="card-img-top" src="/images/_full.jpg" alt="Card image cap">
+                    <img class="card-img-top" src="{{ Link }}" alt="Card image cap" height="350">
                     <div class="card-body">
-                        <p>Day: End Traveling is now part of who we are as family. Going out together is a wonderful opportunity to isolate yourself from our daily lives. It allows us to make room for the magic of spontaneity, to rediscover ourselves in our discussions, our silences and our complicit laughter. Leaving is also making choices. We are often told that traveling like us is expensive. Yes a bit. However, the daily material sacrifices help us to enrich our suitcase with experiences and history. And this is priceless. Above all, it is curiosity as a way of life that drives us. We chose a Muslim country to live this difference. The call to prayer, the differences between man and woman, the niqab: all these experiences will make us more tolerant people, we hope so. Morocco will have given us a lot and the memories will remain marked in us much longer than the henna ink. At the next adventure</p>
+                        <p>{{ Description }}</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-6" style="padding: 0%;">
                 <div id="map"></div>
             </div>
+            {{/data}}
         </div>
     </div>
-
 
 </div>
 

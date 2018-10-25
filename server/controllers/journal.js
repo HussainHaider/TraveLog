@@ -10,12 +10,21 @@ module.exports = {
         tripType = req.params.tripType;
 
         console.log("itemID: "+itemID);
-        console.log("tripType: "+tripType);
+        console.log("tripType: "+typeof(tripType));
 
-        model.showJournalDetail(itemID, tripType,req.session.user.userID)
+        let TypeOfTrip;
+        if(tripType==='1'){
+            TypeOfTrip="Within City Trips";
+        } else if (tripType==='2'){
+            TypeOfTrip="Out of City Trips";
+        } else if (tripType==='3'){
+            TypeOfTrip="Out of State Trips";
+        }
+
+        model.showJournalDetail(itemID, TypeOfTrip,req.session.user.userID)
         .then((result) => {
-            console.log("Fired");
-            res.render('profileJournal', { title: 'Journal Name | TraveLog',logo:'/images/logo.jpg' });
+            console.log("Fired:" + result.data);
+            res.render('profileJournal', { title: 'Journal Name | TraveLog',logo:'/images/logo.jpg',session: req.session.user,data:result.data });
         })
         .catch((err) => {
             console.log("Cancel!!" + err);
