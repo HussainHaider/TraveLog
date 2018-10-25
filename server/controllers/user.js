@@ -47,7 +47,7 @@ module.exports = {
         model.logoutUser()
             .then((result) => {
                 req.session=null;
-                console.log("Successfully SignOut:", result.userID);
+                console.log("Successfully SignOut:", JSON.stringify(req.session));
                 res.redirect('/');
             })
             .catch((err) => {
