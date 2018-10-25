@@ -20,6 +20,8 @@ var app = express();
 var firebase = require("firebase");
 var session = require('express-session');
 
+const model = require('/models/model.js');
+
 
 
  var config = require('../configuration/config');
@@ -154,8 +156,8 @@ passport.use(new GoogleStrategy({
             userID:profile['id'],
             userName: profile['displayName'],
             userEmail:profile['emails'][0]['value']
-        }; 
-        addUserByFB_Google(newUser.userName,newUser.userEmail,newUser.userID);
+        };
+        model.addUserByFB_Google(newUser.userName,newUser.userEmail,newUser.userID);
 
         return done(null, newUser);
     }
