@@ -192,7 +192,7 @@ module.exports = {
         });
     },
 
-    addUserByFB_Google: function(fullName,email,id) {
+    checkUserByFB_Google: function(email) {
         return new Promise((resolve, reject) => {
             db.ref('users/').once('value', function(snapshot) {
                 snapshot.forEach(function(childSnapshot) {
@@ -205,18 +205,20 @@ module.exports = {
                         }
                     });
                 });
-
-
-                db.ref('users/' + id).set({
-                    username: fullName,
-                    email: email
-                }).then(function () {
-                    resolve();
-                }).catch(function () {
-                    reject();
-                })
             });
+        });
+    },
 
+    addUserByFB_Google: function(fullName,email,id) {
+        return new Promise((resolve, reject) => {
+            db.ref('users/' + id).set({
+                username: fullName,
+                email: email
+            }).then(function () {
+                resolve();
+            }).catch(function () {
+                reject();
+            })
         });
     },
 };

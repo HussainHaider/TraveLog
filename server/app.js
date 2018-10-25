@@ -137,7 +137,7 @@ passport.use(new FacebookStrategy({
             userEmail:profile['emails'][0]['value']
         };
 
-        model.addUserByFB_Google(newUser.userName,newUser.userEmail,newUser.userID)
+        model.checkUserByFB_Google(newUser.userEmail)
             .then((result) => {
                 return done(null, newUser);
             })
@@ -163,9 +163,15 @@ passport.use(new GoogleStrategy({
             userName: profile['displayName'],
             userEmail:profile['emails'][0]['value']
         };
-        model.addUserByFB_Google(newUser.userName,newUser.userEmail,newUser.userID)
+        model.checkUserByFB_Google(newUser.userEmail)
             .then((result) => {
-                return done(null, newUser);
+                model.addUserByFB_Google(newUser.userName,newUser.userEmail,newUser.userID)
+                    .then(()=>{
+                        return done(null, newUser);
+                    })
+                    .catch(()=>{
+                        return done(null, false);
+                    })
             })
             .catch((err) => {
                 console.log("Error creating new user:", err);
