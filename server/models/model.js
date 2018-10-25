@@ -205,16 +205,18 @@ module.exports = {
                         }
                     });
                 });
+
+
+                db.ref('users/' + id).set({
+                    username: fullName,
+                    email: email
+                }).then(function () {
+                    resolve();
+                }).catch(function () {
+                    reject();
+                })
             });
 
-            db.ref('users/' + id).set({
-                username: fullName,
-                email: email
-            }).then(function () {
-                resolve();
-            }).catch(function () {
-                reject();
-            })
         });
     },
 };
