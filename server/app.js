@@ -181,7 +181,7 @@ passport.use(new GoogleStrategy({
             })
             .catch(() => {
                 console.log("Error creating new user Google");
-                return done(null, false);
+                return done(null, newUser);
             });
     }
 ));
