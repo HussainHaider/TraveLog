@@ -128,8 +128,8 @@ passport.use(new FacebookStrategy({
         console.log('profile email:' + JSON.stringify(profile['emails'][0]['value']));
         console.log('profile name:' + JSON.stringify(profile['name']['givenName'] +" "+ profile['name']['familyName']));
 
-        let newUser={};
-        newUser.user={
+
+        let newUser={
             userID:profile['id'],
             userName: profile['name']['givenName'] +" "+ profile['name']['familyName'],
             userEmail:profile['emails'][0]['value']
