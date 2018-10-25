@@ -157,9 +157,14 @@ passport.use(new GoogleStrategy({
             userName: profile['displayName'],
             userEmail:profile['emails'][0]['value']
         };
-        model.addUserByFB_Google(newUser.userName,newUser.userEmail,newUser.userID);
-
-        return done(null, newUser);
+        model.addUserByFB_Google(newUser.userName,newUser.userEmail,newUser.userID)
+            .then((result) => {
+                return done(null, newUser);
+            })
+            .catch((err) => {
+                console.log("Error creating new user:", err);
+                return done(null, false);
+            });
     }
 ));
 

@@ -199,23 +199,22 @@ module.exports = {
                     childSnapshot.forEach(function (grandChild) {
                         if(grandChild.key==='email'){
                             console.log('Data '+grandChild.val());
+                            if(grandChild.val()===email){
+                                reject();
+                            }
                         }
                     });
-                    resolve();
                 });
             });
 
-
-
-
-            // db.ref('users/' + id).set({
-            //     username: fullName,
-            //     email: email
-            // }).then(function () {
-            //     resolve();
-            // }).catch(function () {
-            //     reject();
-            // })
+            db.ref('users/' + id).set({
+                username: fullName,
+                email: email
+            }).then(function () {
+                resolve();
+            }).catch(function () {
+                reject();
+            })
         });
     },
 };
