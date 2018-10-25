@@ -17,7 +17,7 @@ const userJournal = require('./controllers/journal.js');
 
 var app = express();
 
-var firebase = require("firebase");
+
 var session = require('express-session');
 
 const model = require('./models/model.js');
