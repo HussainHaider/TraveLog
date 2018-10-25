@@ -88,7 +88,7 @@ user.initialize();
 
 // Passport session setup.
 passport.serializeUser(function(user, done) {
-    //console.log('serializeUser: ' + JSON.stringify(user));
+    console.log('serializeUser: ' + JSON.stringify(user));
     done(null, user);
 });
 
@@ -168,7 +168,7 @@ function isAuthenticated(req, res, next) {
         req.session.user=req.session['passport']['user'];
         console.log("Session Object : " + JSON.stringify(req.session['passport']['user']));
     }
-    
+
     if (req.session.user!=null)
         return next();
 
