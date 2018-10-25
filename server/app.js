@@ -61,6 +61,7 @@ app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'hbs');
 
 app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -127,15 +128,15 @@ passport.use(new FacebookStrategy({
         console.log('profile email:' + JSON.stringify(profile['emails'][0]['value']));
         console.log('profile name:' + JSON.stringify(profile['name']['givenName'] +" "+ profile['name']['familyName']));
 
-        // var newUser={};
-        // newUser.user={
-        //     userID:profile['id'],
-        //     userName: fullName,
-        //     userEmail:profile['email']
-        // };
+        let newUser={};
+        newUser.user={
+            userID:profile['id'],
+            userName: profile['name']['givenName'] +" "+ profile['name']['familyName'],
+            userEmail:profile['emails'][0]['value']
+        };
 
         //profile.id,profile.name(profile.name.givenName),profile.emails[0].value
-        return done(null, profile);
+        return done(null, newUser);
     }
 ));
 
