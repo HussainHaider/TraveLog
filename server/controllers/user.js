@@ -46,7 +46,9 @@ module.exports = {
     signOut: function(req, res) {
         model.logoutUser()
             .then((result) => {
-                req.session=null;
+                req.session.destroy(function(err) {
+                    console.log("cannot access session here");
+                });
                 console.log("Successfully SignOut:", JSON.stringify(req.session));
                 res.redirect('/');
             })
