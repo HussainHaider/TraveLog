@@ -149,7 +149,15 @@ passport.use(new GoogleStrategy({
     function(token, tokenSecret, profile, done) {
         //profile.id,profile.displayName,profile.emails[0].value
         console.log("Google profile" + JSON.stringify(profile));
-        return done(null, profile);
+
+        let newUser={
+            userID:profile['id'],
+            userName: profile['displayName'],
+            userEmail:profile['emails'][0]['value']
+        };
+
+
+        return done(null, newUser);
     }
 ));
 
