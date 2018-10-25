@@ -167,7 +167,7 @@ function isAuthenticated(req, res, next) {
         req.session.user=req.session['passport']['user'];
         console.log("Session Object : " + JSON.stringify(req.session['passport']['user']));
     }
-    if(req.session.passport!=null){
+    if(req.session.passport==null){
         console.log("NULL");
     }
 
