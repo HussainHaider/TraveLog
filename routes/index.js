@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    console.log("index route");
+    console.log("index route: " + req.session);
     if(req.session.user===null && req.session.passport===null){
         console.log("User already exit");
         res.redirect('/profile');
