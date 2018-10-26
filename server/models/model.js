@@ -197,20 +197,8 @@ module.exports = {
             let flag=false;
             db.ref('users/').once('value', function(snapshot) {
                 snapshot.forEach(function(childSnapshot) {
-                    childSnapshot.forEach(function (grandChild) {
-                        if(grandChild.key==='email'){
-                            console.log('Data '+grandChild.val());
-                            if(grandChild.val()===email){
-                                reject();
-                            } else {
-                                flag=true;
-                            }
-                        }
-                    });
+                    console.log('Email Data: '+childSnapshot['email']);
                 });
-                if(flag===true){
-                    resolve();
-                }
             });
         });
     },
