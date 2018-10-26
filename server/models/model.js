@@ -192,14 +192,22 @@ module.exports = {
         });
     },
 
-    checkUserByFB_Google: function(email) {
+    checkUserByFB_Google: function(email,id) {
         return new Promise((resolve, reject) => {
             let flag=false;
             db.ref('users/').once('value', function(snapshot) {
                 snapshot.forEach(function(childSnapshot) {
-                    console.log('Key Data: '+ childSnapshot.key);
-                    console.log('Email Data: '+ childSnapshot.val()['email']);
+                    if(childSnapshot.key === id && childSnapshot.val()['email'] ===email){
+                        reject(true);
+                    } else if (childSnapshot.key !== id && childSnapshot.val()['email'] ===email) {
+                        reject(false);
+                    } else {
+                        flag=true;
+                    }
                 });
+                if(flag===true){
+                    resolve();
+                }
             });
         });
     },
