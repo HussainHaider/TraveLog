@@ -137,7 +137,7 @@ passport.use(new FacebookStrategy({
             userEmail:profile['emails'][0]['value']
         };
 
-        model.checkUserByFB_Google(newUser.userEmail)
+        model.checkUserByFB_Google(newUser.userEmail,newUser.userID)
             .then(() => {
                 model.addUserByFB_Google(newUser.userName,newUser.userEmail,newUser.userID)
                     .then(()=>{
