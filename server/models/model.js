@@ -197,7 +197,8 @@ module.exports = {
             let flag=false;
             db.ref('users/').once('value', function(snapshot) {
                 snapshot.forEach(function(childSnapshot) {
-                    console.log('Email Data: '+ childSnapshot.val());
+                    console.log('Key Data: '+ childSnapshot.key);
+                    console.log('Email Data: '+ childSnapshot.val()['email']);
                 });
             });
         });
