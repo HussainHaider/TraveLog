@@ -60,11 +60,14 @@ module.exports = {
 
         model.editJournalDetail(itemID, tripType,req.session.user.userID)
             .then((result) => {
-                res.redirect('/profile');
+                res.render('editJournal', { title: 'Journal Name | TraveLog',logo:'/images/logo.jpg',session: req.session.user });
             })
             .catch((err) => {
                 console.log("Cancel!!" + err);
                 res.redirect('/profile');
             });
+    },
+    UserJournal: function(req, res) {
+        res.render('userJournal', { title: 'Journal Name | TraveLog',logo:'/images/logo.jpg',session: req.session.user });
     }
 };

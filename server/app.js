@@ -110,6 +110,7 @@ app.get('/logOut',isAuthenticated, user.signOut);
 app.get('/showJournal/:tripType/:id',isAuthenticated, userJournal.showUserJournal);
 app.get('/editJournal/:tripType/:id',isAuthenticated, userJournal.editUserJournal);
 app.get('/deleteJournal/:tripType/:id',isAuthenticated, userJournal.deleteUserJournal);
+app.get('/userJournal',isAuthenticated, userJournal.UserJournal);
 app.post('/addDiary',isAuthenticated, upload.single('image'), userProfile.addUserDiary);
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email'] }));
 app.get('/auth/facebook/callback',

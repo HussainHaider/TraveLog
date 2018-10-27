@@ -43,8 +43,17 @@ $('#DeleteModal').on('show.bs.modal', function (event) {
 
     var modal = $(this)
     modal.find('.modal-footer a').attr("href", recipient);
-})
+});
 
+$( document ).ready(function() {
+
+    setInterval(stopAnimation,10000);
+
+    function stopAnimation(){
+        $( "#thread1" ).css("display", "none" );
+    }
+
+});
 // function showTripsDiv() {
 //     document.getElementById("loader").style.display = "none";
 //     document.getElementById("Trips_Div").style.display = "block";

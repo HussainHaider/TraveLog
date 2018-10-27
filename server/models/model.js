@@ -188,7 +188,7 @@ module.exports = {
     },
     editJournalDetail:function(itemID, tripType,userID){
         return new Promise((resolve, reject) => {
-
+            resolve();
         });
     },
 
