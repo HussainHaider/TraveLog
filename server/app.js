@@ -109,6 +109,7 @@ app.post('/editProfile',isAuthenticated, userProfile.editUserProfileData);
 app.get('/logOut',isAuthenticated, user.signOut);
 app.get('/showJournal/:tripType/:id',isAuthenticated, userJournal.showUserJournal);
 app.get('/editJournal/:tripType/:id',isAuthenticated, userJournal.editUserJournal);
+app.post('/updateJournal/:tripType/:id',isAuthenticated, userJournal.updateUserJournal);
 app.get('/deleteJournal/:tripType/:id',isAuthenticated, userJournal.deleteUserJournal);
 app.get('/userJournal',isAuthenticated, userJournal.UserJournal);
 app.post('/addDiary',isAuthenticated, upload.single('image'), userProfile.addUserDiary);

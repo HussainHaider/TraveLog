@@ -40,7 +40,7 @@
                 {{#if updateError}}
                 <p class="error">Error occur while updating your Profile</p>
                 {{/if}}
-                <form method="post" action="/">
+                <form method="post" action="/updateJournal/{{tripType}}/{{itemID}}">
                     <div class="form-group">
                         <label for="name">Title</label>
                         <input type="text" class="form-control" id="title" name="title" aria-describedby="emailHelp" value={{ Data.Title }}>
@@ -49,17 +49,17 @@
 
                     <div class="form-group">
                         <label for="email">Description</label>
-                        <textarea type="text" class="form-control" cols="60" rows="5">{{ Data.Description }}</textarea>
+                        <textarea type="text" name="Description" class="form-control" cols="60" rows="5">{{ Data.Description }}</textarea>
                     </div>
 
-                    <div class="form-group">
-                        <label for="exampleFormControlSelect2">Select type</label>
-                        <select class="form-control" id="exampleFormControlSelect2">
-                            <option>Within City Trips</option>
-                            <option>Out of City Trips</option>
-                            <option>Out of State Trips</option>
-                        </select>
-                    </div>
+                    <!--<div class="form-group">-->
+                        <!--<label for="exampleFormControlSelect2">Select type</label>-->
+                        <!--<select class="form-control" id="exampleFormControlSelect2">-->
+                            <!--<option>Within City Trips</option>-->
+                            <!--<option>Out of City Trips</option>-->
+                            <!--<option>Out of State Trips</option>-->
+                        <!--</select>-->
+                    <!--</div>-->
 
                     <div class="form-group">
                         <label for="filevalue">Add Picture or Video</label>

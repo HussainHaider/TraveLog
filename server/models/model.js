@@ -197,6 +197,28 @@ module.exports = {
                 });
         });
     },
+    updateJournalDetail:function(itemID, tripType,userID,title,Desc){
+        return new Promise((resolve, reject) => {
+            console.log("Route:" + 'Diary/'+ tripType +'/' + userID+'/' + itemID);
+
+            var postData = {
+                Title: title,
+                Description: Desc,
+            };
+
+            var updates = {};
+            updates['Diary/'+ tripType +'/' + userID+'/' + itemID] = postData;
+
+            db.ref().update(updates)
+                .then(function() {
+                    resolve();
+                })
+                .catch(function (err) {
+                    console.log('unable to Update User Profile Data ');
+                    reject(err.code + err.message);
+                })
+        });
+    },
 
     checkUserByFB_Google: function(email,id) {
         return new Promise((resolve, reject) => {
