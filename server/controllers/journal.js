@@ -58,9 +58,18 @@ module.exports = {
         itemID = req.params.id;
         tripType = req.params.tripType;
 
-        model.editJournalDetail(itemID, tripType,req.session.user.userID)
+        let TypeOfTrip;
+        if(tripType==='1'){
+            TypeOfTrip="Within City Trips";
+        } else if (tripType==='2'){
+            TypeOfTrip="Out of City Trips";
+        } else if (tripType==='3'){
+            TypeOfTrip="Out of State Trips";
+        }
+
+        model.editJournalDetail(itemID, TypeOfTrip,req.session.user.userID)
             .then((result) => {
-                res.render('editJournal', { title: 'Journal Name | TraveLog',logo:'/images/logo.jpg',session: req.session.user });
+                res.render('editJournal', { title: 'Journal Name | TraveLog',logo:'/images/logo.jpg',session: req.session.user,Data:result.data,updateError:false });
             })
             .catch((err) => {
                 console.log("Cancel!!" + err);

@@ -188,7 +188,13 @@ module.exports = {
     },
     editJournalDetail:function(itemID, tripType,userID){
         return new Promise((resolve, reject) => {
-            resolve();
+            console.log("Route:" + 'Diary/'+ tripType +'/' + userID+'/' + itemID);
+            db.ref('Diary/'+ tripType +'/' + userID+'/' + itemID)
+                .on('value', function(snapshot) {
+                    resolve({
+                        data:snapshot.val()
+                    });
+                });
         });
     },
 
