@@ -35,17 +35,19 @@ module.exports = {
         Description = req.body.Description;
         tripType = req.body.tripType;
         uploadFile=req.body.uploadFile;
+        location=req.body.location;
 
         console.log("title" + title);
         console.log("Description" + Description);
         console.log("tripType" + tripType);
         console.log("uploadFile" + uploadFile);
+        console.log("location" + location);
 
         cloudinary.uploader.upload(req.file.path, function(result) {
             // add cloudinary url for the image to the campground object under image property
             console.log('URL:' + result.secure_url);
 
-            model.addDiary(title,Description,tripType,result.secure_url,req.session.user.userID)
+            model.addDiary(title,Description,tripType,result.secure_url,location,req.session.user.userID)
                 .then((result) => {
                     console.log("Done!!" + result);
                     res.redirect('/profile');

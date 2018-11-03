@@ -76,16 +76,24 @@ module.exports = {
         });
     },
 
-    addDiary:function (title,Description,tripType,Link,userID) {
+    addDiary:function (title,Description,tripType,Link,Location,userID) {
         return new Promise((resolve, reject) => {
 
-            var newAppKey =firebaseKey.key();
+            let temploc = Location.match(/\(([^)]+)\)/)[1];
+            temploc=temploc.split(',');
+            
+
+            let newAppKey =firebaseKey.key();
             console.log('newAppKey'+newAppKey);
 
             db.ref('Diary/' +tripType+'/'+userID+'/'+newAppKey).set({
                 Title: title,
                 Description: Description,
-                Link:Link
+                Link:Link,
+                Location:{
+                    latitude:temploc[0],
+                    longitude:temploc[1]
+                }
             });
             console.log("In addDiary");
             resolve();
