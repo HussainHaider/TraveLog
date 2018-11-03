@@ -37,26 +37,53 @@ module.exports = {
         uploadFile=req.body.uploadFile;
         location=req.body.location;
 
-        console.log("title" + title);
-        console.log("Description" + Description);
-        console.log("tripType" + tripType);
-        console.log("uploadFile" + uploadFile);
-        console.log("location" + location);
+        console.log("title:" + title);
+        console.log("Description:" + Description);
+        console.log("tripType:" + tripType);
+        console.log("image:" + req.file.path);
+        console.log("location:" + location);
 
-        cloudinary.uploader.upload(req.file.path, function(result) {
-            // add cloudinary url for the image to the campground object under image property
-            console.log('URL:' + result.secure_url);
+        let ext = req.file.path.substr(req.file.path.lastIndexOf('.') + 1);
+        if(ext==="jpg" || ext==="jpeg" || ext==="png" || ext==="gif"){
+            cloudinary.v2.uploader.upload(req.file.path,{ folder:"Images" }, function(error,result) {
+                // add cloudinary url for the image to the campground object under image property
+                if(result){
+                    console.log('URL:' + result.secure_url);
+                }
 
-            model.addDiary(title,Description,tripType,result.secure_url,location,req.session.user.userID)
-                .then((result) => {
-                    console.log("Done!!" + result);
-                    res.redirect('/profile');
-                })
-                .catch((err) => {
-                    console.log("Cancel!!" + err);
-                    res.redirect('/profile');
+                model.addDiary(title,Description,tripType,result.secure_url,location,req.session.user.userID)
+                    .then((result) => {
+                        console.log("Done!!" + result);
+                        res.redirect('/profile');
+                    })
+                    .catch((err) => {
+                        console.log("Cancel!!" + err);
+                        res.redirect('/profile');
+                    });
+            });
+        } else {
+            cloudinary.v2.uploader.upload(req.file.path,{ resource_type: "video",folder:"Videos",public_id:"dog" }, function(error,result) {
+                // add cloudinary url for the image to the campground object under image property
+                cloudinary.image("dog.jpg", {resource_type: "video"},function (result) {
+                    console.log('thumbnail URL:' + result);
                 });
-        });
+
+
+                if(result){
+                    console.log('URL:' + result.secure_url);
+                }
+
+                model.addDiary(title,Description,tripType,result.secure_url,location,req.session.user.userID)
+                    .then((result) => {
+                        console.log("Done!!" + result);
+                        res.redirect('/profile');
+                    })
+                    .catch((err) => {
+                        console.log("Cancel!!" + err);
+                        res.redirect('/profile');
+                    });
+            });
+        }
     },
     getUserProfileData: function(req, res) {
         model.getProfileData(req.session.user.userID)

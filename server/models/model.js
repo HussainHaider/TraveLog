@@ -81,7 +81,6 @@ module.exports = {
 
             let temploc = Location.match(/\(([^)]+)\)/)[1];
             temploc=temploc.split(',');
-            
 
             let newAppKey =firebaseKey.key();
             console.log('newAppKey'+newAppKey);

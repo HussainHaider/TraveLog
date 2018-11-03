@@ -42,11 +42,12 @@ var storage = multer.diskStorage({
 var imageFilter = function (req, file, cb) {
     // accept image files only
     if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
+        console.log('Only image files are allowed!');
         return cb(new Error('Only image files are allowed!'), false);
     }
     cb(null, true);
 };
-var upload = multer({ storage: storage, fileFilter: imageFilter});
+var upload = multer({ storage: storage});
 
 cloudinary.config({
     cloud_name: 'hussain-imagestorage',
