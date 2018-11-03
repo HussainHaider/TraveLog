@@ -59,7 +59,30 @@
                 </div>
             </div>
                 <div class="col-md-6" style="padding: 0%;padding-left: 1px;">
-                    <img src="https://maps.locationiq.com/v2/staticmap?key=cf0e4a0e194f14&center=31.4823,74.303&zoom=15&size=480x480&markers=31.4823,74.303|icon:large-red-cutout|fillcolor:%23add8e6|weight:1" height="100%" width="100%">
+                    <div id="map" style="height: 780px;"></div>
+                    <script>
+                        var key = 'cf0e4a0e194f14';
+                        // Add layers that we need to the map
+                        var streets = L.tileLayer.Unwired({key: key, scheme: "streets"});
+
+                        // Initialize the map
+                        var map = L.map('map', {
+                            center: [{{ Location.latitude }},{{ Location.longitude }}], //map loads with this location as center
+                            zoom: 15,
+                            layers: [streets] // Show 'streets' by default
+                        });
+
+                        // Add the 'scale' control
+                        L.control.scale().addTo(map);
+
+                        // Add the 'layers' control
+                        L.control.layers({
+                            "Streets": streets
+                        }).addTo(map);
+
+
+                        var marker = L.marker([{{ Location.latitude }},{{ Location.longitude }}]).addTo(map);
+                    </script>
                 </div>
             {{/data}}
         </div>
