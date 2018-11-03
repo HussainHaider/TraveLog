@@ -197,19 +197,26 @@ module.exports = {
                 });
         });
     },
-    updateJournalDetail:function(itemID, tripType,userID,title,Desc){
+    updateJournalDetail:function(itemID, tripType,userID,title,Desc,uploadFile){
         return new Promise((resolve, reject) => {
             console.log("Route:" + 'Diary/'+ tripType +'/' + userID+'/' + itemID);
 
-            var postData = {
-                Title: title,
-                Description: Desc,
-            };
+            let postData;
+            if(uploadFile!==undefined){
+                postData = {
+                    Title: title,
+                    Description: Desc,
+                    Link:uploadFile
+                };
+            } else {
+                postData = {
+                    Title: title,
+                    Description: Desc
+                };
+            }
 
-            var updates = {};
-            updates['Diary/'+ tripType +'/' + userID+'/' + itemID] = postData;
 
-            db.ref().update(updates)
+            db.ref('Diary/'+ tripType +'/' + userID+'/' + itemID).update(postData)
                 .then(function() {
                     resolve();
                 })

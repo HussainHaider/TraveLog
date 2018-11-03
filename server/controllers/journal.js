@@ -69,11 +69,10 @@ module.exports = {
 
         title = req.body.title;
         Description = req.body.Description;
-        //uploadFile=req.body.uploadFile;
+        uploadFile=req.body.uploadFile;
 
-        console.log("IN update User Journal");
 
-        model.updateJournalDetail(itemID, TypeOfTrip(tripType),req.session.user.userID,title,Description)
+        model.updateJournalDetail(itemID, TypeOfTrip(tripType),req.session.user.userID,title,Description,uploadFile)
             .then((result) => {
                 console.log("EDIT DATA:" + JSON.stringify(result.data));
                 res.redirect('/profile');
