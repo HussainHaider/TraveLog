@@ -267,4 +267,47 @@ module.exports = {
             })
         });
     },
+    searchUsersProfile:function(searchType, searchText){
+        return new Promise((resolve, reject) => {
+            console.log("Route:" + 'users/');
+            let tempData={};
+
+            if(searchType==="Name") {
+                db.ref('users/').orderByChild('username').equalTo(searchText).on("value", function(snapshot) {
+                    tempData=snapshot.val();
+                    resolve({
+                        data:tempData
+                    });
+                });
+            } else if(searchType==="Age") {
+                db.ref('users/').orderByChild('age').equalTo(searchText).on("value", function(snapshot) {
+                    tempData=snapshot.val();
+                    resolve({
+                        data:tempData
+                    });
+                });
+            } else if(searchType==="City") {
+                db.ref('users/').orderByChild('city').equalTo(searchText).on("value", function(snapshot) {
+                    tempData=snapshot.val();
+                    resolve({
+                        data:tempData
+                    });
+                });
+            } else if(searchType==="Country") {
+                db.ref('users/').orderByChild('country').equalTo(searchText).on("value", function(snapshot) {
+                    tempData=snapshot.val();
+                    resolve({
+                        data:tempData
+                    });
+                });
+            } else if(searchType==="phoneNumber") {
+                db.ref('users/').orderByChild('age').equalTo(searchText).on("value", function(snapshot) {
+                    tempData=snapshot.val();
+                    resolve({
+                        data:tempData
+                    });
+                });
+            }
+        });
+    }
 };

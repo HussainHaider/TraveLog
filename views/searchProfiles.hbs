@@ -1,0 +1,109 @@
+<header>
+    <nav class="navbar navbar-expand-md navbar-white fixed-top">
+
+
+        <div class="collapse navbar-collapse" id="navbarsExample04">
+            <ul class="navbar-nav navbar-nav-scroll">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/explore"><img src="images/explore.png" alt="explore image">Explore</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile"><img src="images/earth-globe_2.png" alt="Diary image">My Diary</a>
+                </li>
+            </ul>
+
+            <a class="navbar-brand mx-auto">
+                <img src="images/logo_reduce.png" alt="small size TraveLog logo">TraveLog
+            </a>
+        </div>
+        <div class="dropdown">
+            <div class="initals">
+                <span class="input-group-text" id="basic-addon1">HH</span>
+                <button class="btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    User Name
+                </button>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="/profile/settings">Settings</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/">Log Out</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="content">
+
+    <div class="container explore_card">
+        <div class="row">
+            <div class="col-md-12" style="text-align: center;margin-top: 2%;">
+                <h3 style="font-size: 45px;">Search Result</h3>
+            </div>
+            {{#if Data}}
+                {{#each Data}}
+                <div class="col-md-4 mb-4">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="./images/_full.jpg" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title" style="text-align: center">{{ username }}</h5>
+                            <div style="text-align: center">
+                                <a href="/userJournal/{{ @key }}" class="btn btn-primary">Show</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            {{else}}
+                <div class="col-md-12 mb-4" style="text-align: center">
+                    <h1 style="color: firebrick">No Record Found</h1>
+                </div>
+            {{/if}}
+        </div>
+    </div>
+
+</div>
+
+<footer id="myFooter">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <h2 class="logo"><a href="#" aria-label="TraveLog_logo"><img src="images/logo_3.png" alt="TraveLog_logo"></a></h2>
+            </div>
+            <div class="col-sm-2">
+                <h5>Get started</h5>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Sign up</a></li>
+                    <li><a href="#">Downloads</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-2">
+                <h5>About us</h5>
+                <ul>
+                    <li><a href="#">Company Information</a></li>
+                    <li><a href="#">Contact us</a></li>
+                    <li><a href="#">Reviews</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-2">
+                <h5>Support</h5>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Help desk</a></li>
+                    <li><a href="#">Forums</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-3">
+                <div class="social-networks">
+                    <a href="#" aria-label="twitter" class="twitter"><i class="fa fa-twitter"></i></a>
+                    <a href="#" aria-label="facebook" class="facebook"><i class="fa fa-facebook"></i></a>
+                    <a href="#" aria-label="google" class="google"><i class="fa fa-google-plus"></i></a>
+                </div>
+                <button type="button" class="btn btn-default">Contact us</button>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <p>© 2018 Copyright Text </p>
+    </div>
+</footer>

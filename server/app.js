@@ -14,6 +14,7 @@ var exploreRouter = require('../routes/explore');
 const user = require('./controllers/user.js');
 const userProfile = require('./controllers/userProfile.js');
 const userJournal = require('./controllers/journal.js');
+const search = require('./controllers/search.js');
 
 var app = express();
 
@@ -112,8 +113,9 @@ app.get('/showJournal/:tripType/:id',isAuthenticated, userJournal.showUserJourna
 app.get('/editJournal/:tripType/:id',isAuthenticated, userJournal.editUserJournal);
 app.post('/updateJournal/:tripType/:id',isAuthenticated, userJournal.updateUserJournal);
 app.get('/deleteJournal/:tripType/:id',isAuthenticated, userJournal.deleteUserJournal);
-app.get('/userJournal',isAuthenticated, userJournal.UserJournal);
 app.post('/addDiary',isAuthenticated, upload.single('image'), userProfile.addUserDiary);
+app.post('/searchProfiles',isAuthenticated, search.searchProfiles);
+app.get('/userJournal/:id',isAuthenticated, userJournal.UserJournal);
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email'] }));
 app.get('/auth/facebook/callback',
     passport.authenticate('facebook', { successRedirect: '/profile',
