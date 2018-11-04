@@ -5,28 +5,28 @@
         <div class="collapse navbar-collapse" id="navbarsExample04">
             <ul class="navbar-nav navbar-nav-scroll">
                 <li class="nav-item">
-                    <a class="nav-link" href="/explore"><img src="/images/explore.png" alt="explore image">Explore</a>
+                    <a class="nav-link" href="/explore"><img src="images/explore.png" alt="explore image">Explore</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/profile"><img src="/images/earth-globe_2.png" alt="Diary image">My Diary</a>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/profile"><img src="images/earth-globe_2.png" alt="Diary image">My Diary</a>
                 </li>
             </ul>
 
             <a class="navbar-brand mx-auto">
-                <img src="/images/logo_reduce.png" alt="small size TraveLog logo">TraveLog
+                <img src="images/logo_reduce.png" alt="small size TraveLog logo">TraveLog
             </a>
         </div>
         <div class="dropdown">
             <div class="initals">
-                <span class="input-group-text" id="basic-addon1">HH</span>
+                <!--<span class="input-group-text" id="basic-addon1">HH</span>-->
                 <button class="btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    User Name
+                    {{ session.userName }}
                 </button>
 
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="/profile/settings">Settings</a>
+                    <a class="dropdown-item" href="/settings">Settings</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/">Log Out</a>
+                    <a class="dropdown-item" href="/logOut">Log Out</a>
                 </div>
             </div>
         </div>

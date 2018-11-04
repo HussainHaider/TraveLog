@@ -86,8 +86,8 @@ app.use(session({
 }));
 
 app.use('/', indexRouter);
-app.use('/userProfile', isAuthenticated, usersRouter);
-app.use('/explore', isAuthenticated, exploreRouter);
+//app.use('/userProfile', isAuthenticated, usersRouter);
+//app.use('/explore', isAuthenticated, exploreRouter);
 user.initialize();
 
 // Passport session setup.
@@ -114,6 +114,7 @@ app.get('/editJournal/:tripType/:id',isAuthenticated, userJournal.editUserJourna
 app.post('/updateJournal/:tripType/:id',isAuthenticated, userJournal.updateUserJournal);
 app.get('/deleteJournal/:tripType/:id',isAuthenticated, userJournal.deleteUserJournal);
 app.post('/addDiary',isAuthenticated, upload.single('image'), userProfile.addUserDiary);
+app.get('/explore',isAuthenticated, search.explore);
 app.post('/searchProfiles',isAuthenticated, search.searchProfiles);
 app.get('/userJournal/:id',isAuthenticated, userJournal.UserJournal);
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email'] }));

@@ -83,6 +83,16 @@ module.exports = {
             });
     },
     UserJournal: function(req, res) {
-        res.render('userJournal', { title: 'Journal Name | TraveLog',logo:'/images/logo.jpg',session: req.session.user });
+        userID = req.params.id;
+
+        model.getUserProfile(userID)
+            .then((result) => {
+                console.log("EDIT DATA:" + JSON.stringify(result));
+                res.render('userJournal', { title: 'Journal | TraveLog',logo:'/images/logo.jpg',session: req.session.user,Type1:result.tripType_1,Type2:result.tripType_2,Type3:result.tripType_3 });
+            })
+            .catch((err) => {
+                console.log("Cancel!!" + err);
+                res.redirect('/profile');
+            });
     }
 };
