@@ -113,6 +113,7 @@ app.post('/addDiary',isAuthenticated, upload.single('image'), userProfile.addUse
 app.get('/explore',isAuthenticated, search.explore);
 app.post('/searchProfiles',isAuthenticated, search.searchProfiles);
 app.get('/userJournal/:id',isAuthenticated, userJournal.UserJournal);
+app.post('/addComment_Rating/:tripType/:itemID',isAuthenticated, userProfile.addCommentRating);
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email'] }));
 app.get('/auth/facebook/callback',
     passport.authenticate('facebook', { successRedirect: '/profile',

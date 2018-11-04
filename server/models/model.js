@@ -309,5 +309,47 @@ module.exports = {
                 });
             }
         });
-    }
+    },
+    addComment_Rating:function(Rate, Comment,itemID,tripType,userName,user_id){
+        return new Promise((resolve, reject) => {
+            console.log("Route:" + 'Diary/'+ tripType +'/' + itemID);
+
+            let newCommentID =firebaseKey.key();
+            console.log('newCommentID'+newCommentID);
+
+            let newReviewID =firebaseKey.key();
+            console.log('newReviewID'+newReviewID);
+
+            let postData = {
+            };
+            postData[newReviewID]={};
+            postData[newReviewID].Rating=Rate;
+            postData[newReviewID]['Comments'] = {};
+            postData[newReviewID]['Comments'][newCommentID]={};
+            postData[newReviewID]['Comments'][newCommentID]['userID']=user_id;
+            postData[newReviewID]['Comments'][newCommentID]['userName']=userName;
+            postData[newReviewID]['Comments'][newCommentID]['userComment']=Comment;
+
+            let userID;
+            db.ref('Diary/'+ tripType +'/').on('value', function(snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                    childSnapshot.forEach(function(data){
+                        if(data.key === itemID){
+                            userID = childSnapshot.key;
+                        }
+                    });
+                });
+
+                db.ref('Diary/'+ tripType +'/' + userID+'/' + itemID+'/'+'Reviews/').set(postData)
+                    .then(function() {
+                        resolve();
+                    })
+                    .catch(function (err) {
+                        console.log('unable to Update User Profile Data ');
+                        reject(err.code + err.message);
+                    })
+            });
+
+         });
+    },
 };

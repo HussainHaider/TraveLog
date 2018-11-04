@@ -604,8 +604,16 @@ hr#thread1{
 .commentsSection{
   border-bottom: 1px solid #ccc;
   padding: 10px 0;
-
 }
+
+.fa {
+  font-size: 25px;
+}
+
+.checked {
+  color: orange;
+}
+
 
 
 

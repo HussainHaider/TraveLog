@@ -100,11 +100,43 @@ module.exports = {
         model.updateProfileData(req.body.name,req.body.email,req.body.number,req.body.age,req.body.city,req.body.country,req.session.user.userID)
             .then((result) => {
                 res.render('Settings', { title: 'Settings | TraveLog',logo:'/images/logo.jpg',updateError:false });
-                res.redirect('/profile');
+
             })
             .catch((err) => {
                 console.log("Error update user:", err);
                 res.render('Settings', { title: 'Settings | TraveLog',logo:'/images/logo.jpg',updateError:true });
             });
+    },
+    addCommentRating: function(req, res) {
+        rate = req.body.rate;
+        comment =req.body.comment;
+        itemID = req.params.itemID;
+        tripType = req.params.tripType;
+        let typeOfTrip;
+        if(tripType==='1'){
+            typeOfTrip = "Within City Trips";
+        } else if (tripType==='2'){
+            typeOfTrip = "Out of City Trips";
+        } else if (tripType==='3'){
+            typeOfTrip = "Out of State Trips";
+        }
+
+         if(rate===undefined){
+             rate=0;
+         }
+        // console.log("Rate:" + rate);
+        // console.log("Comment:" + comment);
+        // console.log("itemID:" + itemID +" tripType: " + typeOfTrip);
+        // console.log("User: " + req.session.user.userID+" "+req.session.user.userName);
+
+        model.addComment_Rating(rate,comment,itemID,typeOfTrip,req.session.user.userName,req.session.user.userID)
+            .then((result) => {
+
+                res.redirect('/explore');
+            })
+            .catch((err) => {
+                console.log("Error update user:", err);
+            });
+
     }
 };
