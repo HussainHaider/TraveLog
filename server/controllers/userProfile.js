@@ -50,8 +50,8 @@ module.exports = {
                 if(result){
                     console.log('URL:' + result.secure_url);
                 }
-
-                model.addDiary(title,Description,tripType,result.secure_url,location,req.session.user.userID)
+                let thumbnail = false;
+                model.addDiary(title,Description,tripType,result.secure_url,location,thumbnail,req.session.user.userID)
                     .then((result) => {
                         console.log("Done!!" + result);
                         res.redirect('/profile');
@@ -62,18 +62,18 @@ module.exports = {
                     });
             });
         } else {
-            cloudinary.v2.uploader.upload(req.file.path,{ resource_type: "video",folder:"Videos",public_id:"dog" }, function(error,result) {
+            cloudinary.v2.uploader.upload(req.file.path,{ resource_type: "video",folder:"Videos" }, function(error,result) {
                 // add cloudinary url for the image to the campground object under image property
-                cloudinary.image("dog.jpg", {resource_type: "video"},function (result) {
-                    console.log('thumbnail URL:' + result);
-                });
-
-
                 if(result){
                     console.log('URL:' + result.secure_url);
                 }
 
-                model.addDiary(title,Description,tripType,result.secure_url,location,req.session.user.userID)
+                let str = result.secure_url.substr(result.secure_url.lastIndexOf('.') + 1);
+                let thumbnail = result.secure_url.split(str)[0];
+                thumbnail = thumbnail+"jpg";
+                console.log("thumbnail:"+ thumbnail);
+
+                model.addDiary(title,Description,tripType,result.secure_url,location,thumbnail,req.session.user.userID)
                     .then((result) => {
                         console.log("Done!!" + result);
                         res.redirect('/profile');

@@ -52,7 +52,11 @@
             {{#data}}
             <div class="col-md-6" style="padding: 3%; box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);">
                 <div class="card" style="width: 38rem;">
+                    {{#if Thumbnail}}
+                        <video controls autoplay name="media" height="350"><source src="{{ Link }}"></video>
+                    {{ else }}
                     <img class="card-img-top" src="{{ Link }}" alt="Card image cap" height="350">
+                    {{/if}}
                     <div class="card-body">
                         <p>{{ Description }}</p>
                     </div>

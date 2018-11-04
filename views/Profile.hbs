@@ -71,7 +71,11 @@
                 {{#each Type1}}
                 <div class="col-md-4 mb-4">
                     <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="{{ Link }}" alt="Card image cap" height="170">
+                        {{#if Thumbnail}}
+                            <img class="card-img-top" src="{{ Thumbnail }}" alt="Card image cap" height="170">
+                        {{ else }}
+                            <img class="card-img-top" src="{{ Link }}" alt="Card image cap" height="170">
+                        {{/if}}
                         <div class="card-body">
                             <h5 class="card-title" style="text-align: center">{{ Title }}</h5>
                             <div style="text-align: center">
@@ -97,7 +101,11 @@
                 {{#each Type2}}
                     <div class="col-md-4 mb-4">
                         <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="{{ Link }}" alt="Card image cap" height="170">
+                            {{#if Thumbnail}}
+                                <img class="card-img-top" src="{{ Thumbnail }}" alt="Card image cap" height="170">
+                            {{ else }}
+                                <img class="card-img-top" src="{{ Link }}" alt="Card image cap" height="170">
+                            {{/if}}
                             <div class="card-body">
                                 <h5 class="card-title" style="text-align: center">{{ Title }}</h5>
                                 <div style="text-align: center">
@@ -123,7 +131,11 @@
                 {{#each Type3}}
                     <div class="col-md-4 mb-4">
                         <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="{{ Link }}" alt="Card image cap" height="170">
+                            {{#if Thumbnail}}
+                                <img class="card-img-top" src="{{ Thumbnail }}" alt="Card image cap" height="170">
+                            {{ else }}
+                                <img class="card-img-top" src="{{ Link }}" alt="Card image cap" height="170">
+                            {{/if}}
                             <div class="card-body">
                                 <h5 class="card-title" style="text-align: center">{{ Title }}</h5>
                                 <div style="text-align: center">

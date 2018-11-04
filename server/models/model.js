@@ -76,7 +76,7 @@ module.exports = {
         });
     },
 
-    addDiary:function (title,Description,tripType,Link,Location,userID) {
+    addDiary:function (title,Description,tripType,Link,Location,thumbnail,userID) {
         return new Promise((resolve, reject) => {
 
             let temploc = Location.match(/\(([^)]+)\)/)[1];
@@ -92,7 +92,8 @@ module.exports = {
                 Location:{
                     latitude:temploc[0],
                     longitude:temploc[1]
-                }
+                },
+                Thumbnail:thumbnail
             });
             console.log("In addDiary");
             resolve();
