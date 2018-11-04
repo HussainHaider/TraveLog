@@ -7,8 +7,6 @@ var sassMiddleware = require('node-sass-middleware');
 var hbs = require('express-handlebars');
 
 var indexRouter = require('../routes/index');
-var usersRouter = require('../routes/userProfile');
-var exploreRouter = require('../routes/explore');
 
 // Controllers
 const user = require('./controllers/user.js');
@@ -86,8 +84,6 @@ app.use(session({
 }));
 
 app.use('/', indexRouter);
-//app.use('/userProfile', isAuthenticated, usersRouter);
-//app.use('/explore', isAuthenticated, exploreRouter);
 user.initialize();
 
 // Passport session setup.
