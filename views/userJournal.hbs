@@ -155,11 +155,12 @@
                             {{/if}}
                             <div class="card-body">
                                 <span class="heading">User Rating</span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span>
+                                {{#times 0 Rating}}
+                                    <span class="fa fa-star checked"></span>
+                                {{/times }}
+                                {{#times 5 Rating}}
+                                    <span class="fa fa-star"></span>
+                                {{/times }}
                                 <p>4.1 average based on 254 reviews.</p>
                                 <hr style="border:3px solid #f1f1f1;position: static">
                                 <p>{{ Description }}</p>
@@ -195,14 +196,16 @@
                                         </div>
                                     </div>
                                 </form>
-                                <div class="row commentsSection">
-                                    <div class="col-md-3">
-                                        Emily Rudd
+                                {{#each Comments}}
+                                    <div class="row commentsSection">
+                                        <div class="col-md-3">
+                                            {{ userName }}
+                                        </div>
+                                        <div class="col-md-9">
+                                            {{ userComment }}
+                                        </div>
                                     </div>
-                                    <div class="col-md-9">
-                                        Wow irealy, i love here. Nice pic
-                                    </div>
-                                </div>
+                                {{/each}}
                             </div>
                         </div>
                     </div>
@@ -250,11 +253,12 @@
                             {{/if}}
                             <div class="card-body">
                                 <span class="heading">User Rating</span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span>
+                                {{#times 0 Rating}}
+                                    <span class="fa fa-star checked"></span>
+                                {{/times }}
+                                {{#times 5 Rating}}
+                                    <span class="fa fa-star"></span>
+                                {{/times }}
                                 <p>4.1 average based on 254 reviews.</p>
                                 <hr style="border:3px solid #f1f1f1;position: static">
                                 <p>{{ Description }}</p>
@@ -290,14 +294,16 @@
                                         </div>
                                     </div>
                                 </form>
-                                <div class="row commentsSection">
-                                    <div class="col-md-3">
-                                        Emily Rudd
+                                {{#each Comments}}
+                                    <div class="row commentsSection">
+                                        <div class="col-md-3">
+                                            {{ userName }}
+                                        </div>
+                                        <div class="col-md-9">
+                                            {{ userComment }}
+                                        </div>
                                     </div>
-                                    <div class="col-md-9">
-                                        Wow irealy, i love here. Nice pic
-                                    </div>
-                                </div>
+                                {{/each}}
                             </div>
                         </div>
                     </div>
