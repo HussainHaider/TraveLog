@@ -129,10 +129,16 @@ module.exports = {
         // console.log("itemID:" + itemID +" tripType: " + typeOfTrip);
         // console.log("User: " + req.session.user.userID+" "+req.session.user.userName);
 
-        model.addComment_Rating(rate,comment,itemID,typeOfTrip,req.session.user.userName,req.session.user.userID)
+        model.addComment(comment,itemID,typeOfTrip,req.session.user.userName,req.session.user.userID)
             .then((result) => {
 
-                res.redirect('/explore');
+                if(result.totalRating!==undefined){
+                    rate = parseInt(rate) + parseInt(result.totalRating)/2;
+                }
+                console.log("Rate:" + rate);
+                model.addRating(Math.ceil(rate),itemID,typeOfTrip,result.userID).then(()=>{
+                    res.redirect('/explore');
+                });
             })
             .catch((err) => {
                 console.log("Error update user:", err);

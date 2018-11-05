@@ -87,7 +87,7 @@ module.exports = {
 
         model.getUserProfile(userID)
             .then((result) => {
-                console.log("EDIT DATA:" + JSON.stringify(result));
+                console.log("User DATA:" + JSON.stringify(result));
                 res.render('userJournal', { title: 'Journal | TraveLog',logo:'/images/logo.jpg',session: req.session.user,Type1:result.tripType_1,Type2:result.tripType_2,Type3:result.tripType_3 });
             })
             .catch((err) => {

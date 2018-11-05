@@ -310,45 +310,63 @@ module.exports = {
             }
         });
     },
-    addComment_Rating:function(Rate, Comment,itemID,tripType,userName,user_id){
+    addComment:function(Comment,itemID,tripType,userName,user_id){
         return new Promise((resolve, reject) => {
             console.log("Route:" + 'Diary/'+ tripType +'/' + itemID);
 
             let newCommentID =firebaseKey.key();
             console.log('newCommentID'+newCommentID);
 
-            let newReviewID =firebaseKey.key();
-            console.log('newReviewID'+newReviewID);
 
             let postData = {
-            };
-            postData.Rating=Rate;
-            postData['Comments'] = {};
-            postData['Comments'][newCommentID]={};
-            postData['Comments'][newCommentID]['userID']=user_id;
-            postData['Comments'][newCommentID]['userName']=userName;
-            postData['Comments'][newCommentID]['userComment']=Comment;
+                userID:user_id,
+                userName:userName,
+                userComment:Comment
 
-            let userID;
+            };
+
+            let userID,total_Rating=0;
+
+
+
             db.ref('Diary/'+ tripType +'/').on('value', function(snapshot) {
                 snapshot.forEach(function(childSnapshot) {
                     childSnapshot.forEach(function(data){
                         if(data.key === itemID){
                             userID = childSnapshot.key;
+                            total_Rating = data.val()['Rating'];
+
+                            //console.log('total_Rating' + total_Rating);
                         }
                     });
                 });
+                db.ref('Diary/'+ tripType +'/'+userID+'/' + itemID+'/'+'Comments/'+newCommentID+'/').set(postData)
+                    .then(function() {
+                        resolve({
+                            userID:userID,
+                            totalRating:total_Rating
+                        });
+                    })
+                    .catch(function (err) {
+                        console.log('unable to Add Comment ');
+                        reject(err.code + err.message);
+                    })
             });
 
-            db.ref('Diary/'+ tripType +'/1025156997666384/' + itemID+'/'+'Reviews/'+newReviewID+'/').set(postData)
+         });
+    },
+
+    addRating:function(rate,itemID,tripType,userID){
+        return new Promise((resolve, reject) => {
+
+            db.ref('Diary/'+ tripType +'/'+userID+'/' + itemID+'/').update({Rating:rate})
                 .then(function() {
                     resolve();
                 })
                 .catch(function (err) {
-                    console.log('unable to Update User Profile Data ');
+                    console.log('unable to Add Rating ');
                     reject(err.code + err.message);
                 })
-
-         });
+        });
     },
 };
