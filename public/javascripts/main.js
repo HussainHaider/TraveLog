@@ -1,3 +1,4 @@
+console.log("In Main.js_1");
 function ShowRegisterDiv(num) {
     document.getElementById("SignUp_button").style.display = "none";
     document.getElementById("LogIn_button").style.display = "none";
@@ -11,7 +12,7 @@ function ShowRegisterDiv(num) {
     }
 }
 
-
+console.log("In Main.js_2");
 function ShowTrips(id) {
     var heading_ID= "Trip_"+id;
     var div_ID= "Trips_Div_"+id;
@@ -62,8 +63,9 @@ $( document ).ready(function() {
 // function progress_timer() {
 //     setTimeout(showTripsDiv, 3000);
 // }
-
+console.log("In Main.js_3");
 (function getLocation() {
+    console.log("In GeLocation");
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
     } else {
