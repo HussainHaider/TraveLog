@@ -322,13 +322,12 @@ module.exports = {
 
             let postData = {
             };
-            postData[newReviewID]={};
-            postData[newReviewID].Rating=Rate;
-            postData[newReviewID]['Comments'] = {};
-            postData[newReviewID]['Comments'][newCommentID]={};
-            postData[newReviewID]['Comments'][newCommentID]['userID']=user_id;
-            postData[newReviewID]['Comments'][newCommentID]['userName']=userName;
-            postData[newReviewID]['Comments'][newCommentID]['userComment']=Comment;
+            postData.Rating=Rate;
+            postData['Comments'] = {};
+            postData['Comments'][newCommentID]={};
+            postData['Comments'][newCommentID]['userID']=user_id;
+            postData['Comments'][newCommentID]['userName']=userName;
+            postData['Comments'][newCommentID]['userComment']=Comment;
 
             let userID;
             db.ref('Diary/'+ tripType +'/').on('value', function(snapshot) {
@@ -339,16 +338,16 @@ module.exports = {
                         }
                     });
                 });
-
-                db.ref('Diary/'+ tripType +'/' + userID+'/' + itemID+'/'+'Reviews/').set(postData)
-                    .then(function() {
-                        resolve();
-                    })
-                    .catch(function (err) {
-                        console.log('unable to Update User Profile Data ');
-                        reject(err.code + err.message);
-                    })
             });
+
+            db.ref('Diary/'+ tripType +'/1025156997666384/' + itemID+'/'+'Reviews/'+newReviewID+'/').set(postData)
+                .then(function() {
+                    resolve();
+                })
+                .catch(function (err) {
+                    console.log('unable to Update User Profile Data ');
+                    reject(err.code + err.message);
+                })
 
          });
     },
