@@ -108,10 +108,10 @@ module.exports = {
             });
     },
     addCommentRating: function(req, res) {
-        rate = req.body.rate;
-        comment =req.body.comment;
         itemID = req.params.itemID;
         tripType = req.params.tripType;
+        rate = req.body.rate;
+        comment =req.body.comment;
         let typeOfTrip;
         if(tripType==='1'){
             typeOfTrip = "Within City Trips";
@@ -124,10 +124,10 @@ module.exports = {
          if(rate===undefined){
              rate=0;
          }
-        // console.log("Rate:" + rate);
-        // console.log("Comment:" + comment);
-        // console.log("itemID:" + itemID +" tripType: " + typeOfTrip);
-        // console.log("User: " + req.session.user.userID+" "+req.session.user.userName);
+        console.log("Rate:" + rate);
+        console.log("Comment:" + comment);
+        console.log("itemID:" + itemID +" tripType: " + typeOfTrip);
+        console.log("User: " + req.session.user.userID+" "+req.session.user.userName);
 
         model.addComment(comment,itemID,typeOfTrip,req.session.user.userName,req.session.user.userID)
             .then((result) => {

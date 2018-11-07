@@ -56,14 +56,20 @@
                         <img class="card-img-top" src="{{ Link }}" alt="Card image cap" height="350">
                     {{/if}}
                     <div class="card-body">
-                        <span class="heading">User Rating</span>
-                        {{#times 0 Rating}}
-                        <span class="fa fa-star checked"></span>
-                        {{/times }}
-                        {{#times 5 Rating}}
-                        <span class="fa fa-star"></span>
-                        {{/times }}
-                        <span><a class="btn" style="margin-left: 50%;"><i class="heart fa fa fa-heart-o"></i></a></span>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <span class="heading">User Rating</span>
+                                {{#times 0 Rating}}
+                                <span class="fa fa-star checked"></span>
+                                {{/times }}
+                                {{#times 5 Rating}}
+                                <span class="fa fa-star"></span>
+                                {{/times }}
+                            </div>
+                            <div class="col-md-4">
+                                <div class="heart"></div>
+                            </div>
+                        </div>
                         <p>4.1 average based on 254 reviews.</p>
                         <hr style="border:3px solid #f1f1f1;position: static">
                         <p>{{ Description }}</p>
@@ -76,16 +82,16 @@
                             </div>
                             <div class="col-md-5">
                                 <div class="rate">
-                                    <input type="radio" id="star5" name="rate" value="5" />
-                                    <label for="star5" title="text">5 stars</label>
-                                    <input type="radio" id="star4" name="rate" value="4" />
-                                    <label for="star4" title="text">4 stars</label>
-                                    <input type="radio" id="star3" name="rate" value="3" />
-                                    <label for="star3" title="text">3 stars</label>
-                                    <input type="radio" id="star2" name="rate" value="2" />
-                                    <label for="star2" title="text">2 stars</label>
-                                    <input type="radio" id="star1" name="rate" value="1" />
-                                    <label for="star1" title="text">1 star</label>
+                                    <input type="radio" id="star5_{{ @key }}" name="rate" value="5" />
+                                    <label for="star5_{{ @key }}" title="text">5 stars</label>
+                                    <input type="radio" id="star4_{{ @key }}" name="rate" value="4" />
+                                    <label for="star4_{{ @key }}" title="text">4 stars</label>
+                                    <input type="radio" id="star3_{{ @key }}" name="rate" value="3" />
+                                    <label for="star3_{{ @key }}" title="text">3 stars</label>
+                                    <input type="radio" id="star2_{{ @key }}" name="rate" value="2" />
+                                    <label for="star2_{{ @key }}" title="text">2 stars</label>
+                                    <input type="radio" id="star1_{{ @key }}" name="rate" value="1" />
+                                    <label for="star1_{{ @key }}" title="text">1 star</label>
                                 </div>
                             </div>
                             <div class="col-md-3"><button class="btn" type="submit">Submit</button></div>
@@ -95,7 +101,7 @@
                                 Your Comment:
                             </div>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" placeholder="Comment" name="comment">
+                                <input type="text" class="form-control" placeholder="Comment" id="Comment-_{{ @key }}" name="comment">
                             </div>
                         </div>
                         </form>

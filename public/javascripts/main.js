@@ -59,7 +59,11 @@ $(".heart").click(function() {
     $(this).toggleClass("fa-heart fa-heart-o");
 });
 
-
+$(function() {
+    $(".heart").on("click", function() {
+        $(this).toggleClass("is-active");
+    });
+});
 // function showTripsDiv() {
 //     document.getElementById("loader").style.display = "none";
 //     document.getElementById("Trips_Div").style.display = "block";

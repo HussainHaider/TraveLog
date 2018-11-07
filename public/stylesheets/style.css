@@ -613,10 +613,29 @@ hr#thread1{
 .checked {
   color: orange;
 }
-.heart{
-  color: #e62e00;
-}
+.heart {
+  width: 100px;
+  height: 100px;
+  background: url("https://cssanimation.rocks/images/posts/steps/heart.png") no-repeat;
+  background-position: 0 0;
+  cursor: pointer;
+  -webkit-transition: background-position 1s steps(28);
+  -o-transition: background-position 1s steps(28);
+  transition: background-position 1s steps(28);
+  -webkit-transition-duration: 0s;
+  -o-transition-duration: 0s;
+  transition-duration: 0s;
+  position: absolute;
+  top: -35px;
+  left: 120px; }
+.heart.is-active {
+  -webkit-transition-duration: 1s;
+  -o-transition-duration: 1s;
+  transition-duration: 1s;
+  background-position: -2800px 0; }
 
+.fa-heart-o:before {
+  content: ""; }
 
 
 

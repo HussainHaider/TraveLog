@@ -93,7 +93,8 @@ module.exports = {
                     latitude:temploc[0],
                     longitude:temploc[1]
                 },
-                Thumbnail:thumbnail
+                Thumbnail:thumbnail,
+                Rating:0
             });
             console.log("In addDiary");
             resolve();
