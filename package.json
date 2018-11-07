@@ -6,11 +6,7 @@
     "node": "8.11.4"
   },
   "scripts": {
-    "start": "node ./bin/www",
-    "create-db": "cd dynamodb && node createCarsTable.js && cd ..",
-    "delete-db": "cd dynamodb && node deleteCarsTable.js && cd ..",
-    "load-data": "cd dynamodb && node loadCarData.js && cd ..",
-    "read-data": "cd dynamodb && node readDataTest.js && cd .."
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "aws-sdk": "^2.332.0",
