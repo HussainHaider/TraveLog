@@ -370,4 +370,36 @@ module.exports = {
                 })
         });
     },
+
+    addToWishList:function(itemID,itemName,userID){
+        return new Promise((resolve, reject) => {
+
+            let newWishID =firebaseKey.key();
+            console.log('newWishID'+newWishID);
+
+            let postData = {
+                ID:itemID,
+                Name:itemName
+            };
+
+            db.ref('users/'+userID+'/'+'wishList/'+newWishID+'/').set(postData)
+                .then(function() {
+                    resolve();
+                })
+                .catch(function (err) {
+                    console.log('unable to Add into WishList ');
+                    reject(err.code + err.message);
+                })
+        });
+    },
+    getWishList:function(userID){
+        return new Promise((resolve, reject) => {
+
+            db.ref('users/' + userID +'/' + 'wishList').on('value', function(snapshot) {
+                resolve({
+                    data:snapshot.val()
+                });
+            });
+        });
+    },
 };

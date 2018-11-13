@@ -5,15 +5,15 @@
         <div class="collapse navbar-collapse" id="navbarsExample04">
             <ul class="navbar-nav navbar-nav-scroll">
                 <li class="nav-item">
-                    <a class="nav-link" href="/explore"><img src="../images/explore.png" alt="explore image">Explore</a>
+                    <a class="nav-link" href="/explore"><img src="images/explore.png" alt="explore image">Explore</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="/profile"><img src="../images/earth-globe_2.png" alt="Diary image">My Diary</a>
+                    <a class="nav-link" href="/profile"><img src="images/earth-globe_2.png" alt="Diary image">My Diary</a>
                 </li>
             </ul>
 
             <a class="navbar-brand mx-auto">
-                <img src="../images/logo_reduce.png" alt="small size TraveLog logo">TraveLog
+                <img src="images/logo_reduce.png" alt="small size TraveLog logo">TraveLog
             </a>
         </div>
         <div class="dropdown">
@@ -34,37 +34,25 @@
         </div>
     </nav>
 </header>
-<div class="content">
-
-    <div class="container explore_card">
+<div class="content" style="margin-top: 5%;">
+    <div class="container">
         <div class="row">
-            <div class="col-md-12" style="text-align: center;margin-top: 2%;">
-                <h3 style="font-size: 45px;">Search Result</h3>
-            </div>
-            {{#if Data}}
-                {{#each Data}}
-                <div class="col-md-4 mb-4">
-                    <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="./images/_full.jpg" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title" style="text-align: center">{{ username }}</h5>
-                            <div style="text-align: center">
-                                <a href="/userJournal/{{ @key }}" class="btn btn-primary">Show</a>
-                            </div>
+            <div class="col-md-12">
+                <div class="list-group">
+                    {{#if Data}}
+                        {{#each Data}}
+                        <a href="{{ ID }}" class="list-group-item list-group-item-action">{{ Name }}</a>
+                        {{/each}}
+                    {{else}}
+                        <div class="col-md-12 mb-4" style="text-align: center">
+                            <h1 style="color: firebrick">No Record Found</h1>
                         </div>
-                    </div>
+                    {{/if}}
                 </div>
-                {{/each}}
-            {{else}}
-                <div class="col-md-12 mb-4" style="text-align: center">
-                    <h1 style="color: firebrick">No Record Found</h1>
-                </div>
-            {{/if}}
+            </div>
         </div>
     </div>
-
 </div>
-
 <footer id="myFooter">
     <div class="container">
         <div class="row">

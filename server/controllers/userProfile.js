@@ -144,5 +144,27 @@ module.exports = {
                 console.log("Error update user:", err);
             });
 
+    },
+    addToWishList: function(req, res) {
+        itemID = req.params.itemID;
+        itemName = req.params.itemName;
+
+        model.addToWishList(itemID,itemName,req.session.user.userID)
+            .then((result) => {
+                res.redirect('/getWishList');
+            })
+            .catch((err) => {
+                console.log("Error update user:", err);
+            });
+    },
+    getWishList: function(req, res) {
+        model.getWishList(req.session.user.userID)
+            .then((result) => {
+                console.log('result: ' + JSON.stringify(result));
+                res.render('WishList', { title: 'WishList | TraveLog',logo:'images/logo.jpg', session: req.session.user,Data:result.data });
+            })
+            .catch((err) => {
+                console.log("Error Getting WishList:", err);
+            });
     }
 };
