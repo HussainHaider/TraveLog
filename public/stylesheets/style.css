@@ -637,6 +637,12 @@ hr#thread1{
 .fa-heart-o:before {
   content: ""; }
 
+#heart{
+  border: 0px;
+}
 
+#heart:focus{
+  outline-width: 0;
+}
 
 /*# sourceMappingURL=style.css.map */
