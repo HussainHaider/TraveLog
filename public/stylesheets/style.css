@@ -645,4 +645,32 @@ hr#thread1{
   outline-width: 0;
 }
 
+.gal-item {
+  overflow: hidden;
+  padding: 1px;
+}
+
+.gal-item .box {
+  height: 350px;
+  overflow: hidden;
+}
+.container2 {
+  position: relative;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 145px;
+  right: 0;
+  background: none;
+  overflow: hidden;
+  width: 100%;
+  height: 0;
+  transition: .5s ease;
+}
+
+.container2:hover .overlay {
+  height: 100%;
+}
 /*# sourceMappingURL=style.css.map */
