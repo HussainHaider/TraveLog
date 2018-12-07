@@ -85,10 +85,18 @@ module.exports = {
             let newAppKey =firebaseKey.key();
             console.log('newAppKey'+newAppKey);
 
+            let newLocationKey =firebaseKey.key();
+            console.log('newAppKey'+newLocationKey);
+
+            db.ref('LocationType/' + locationType+'/'+ newLocationKey).set({
+                tripType:tripType,
+                userID:userID,
+                diaryId:newAppKey
+            });
+
             db.ref('Diary/' +tripType+'/'+userID+'/'+newAppKey).set({
                 Title: title,
                 Name: placeName,
-                LocationType:locationType,
                 Description: Description,
                 Link:Link,
                 Location:{
@@ -402,6 +410,22 @@ module.exports = {
                     data:snapshot.val()
                 });
             });
+        });
+    },
+    getLocationGalleryImages:function(LocationType){
+        return new Promise((resolve, reject) => {
+
+            db.ref('LocationType/'+LocationType).once('value', function(snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+
+                    db.ref('Diary/'+childSnapshot.val()['tripType']+'/'+childSnapshot.val()['userID']+'/'+childSnapshot.val()['diaryId']).once('value', function(data) {
+                        console.log('childSnapshot is: '+JSON.stringify(data));
+                    });
+
+
+                });
+            });
+
         });
     },
 };
