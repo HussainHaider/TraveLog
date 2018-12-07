@@ -76,7 +76,7 @@ module.exports = {
         });
     },
 
-    addDiary:function (title,Description,tripType,Link,Location,thumbnail,userID) {
+    addDiary:function (title,placeName,locationType,Description,tripType,Link,Location,thumbnail,userID) {
         return new Promise((resolve, reject) => {
 
             let temploc = Location.match(/\(([^)]+)\)/)[1];
@@ -87,6 +87,8 @@ module.exports = {
 
             db.ref('Diary/' +tripType+'/'+userID+'/'+newAppKey).set({
                 Title: title,
+                Name: placeName,
+                LocationType:locationType,
                 Description: Description,
                 Link:Link,
                 Location:{
