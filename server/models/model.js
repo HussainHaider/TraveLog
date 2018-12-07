@@ -302,7 +302,7 @@ module.exports = {
                     });
                 });
             } else if(searchType==="phoneNumber") {
-                db.ref('users/').orderByChild('age').equalTo(searchText).on("value", function(snapshot) {
+                db.ref('users/').orderByChild('phoneNumber').equalTo(searchText).on("value", function(snapshot) {
                     tempData=snapshot.val();
                     resolve({
                         data:tempData
