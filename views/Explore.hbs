@@ -95,18 +95,29 @@
         </div>
 
         <div class="row">
-
+        {{#if Data}}
+            {{#each Data}}
             <div class="col-md-4 col-sm-6 co-xs-12 gal-item container2">
-                <div class="box"> <img src="./images/_full.jpg" alt="Avatar" class="image" style="display: block;">
+                <div class="box">
+                    {{#if Thumbnail}}
+                        <img src="{{ Thumbnail }}" alt="Avatar" class="image" style="display: block;">
+                    {{ else }}
+                            <img src="{{ Link }}" alt="Avatar" class="image" style="display: block;">
+                    {{/if}}
                     <div class="overlay">
                         <div class="text">
-                            <h1 style="color: white">India</h1>
-                            <a href="#" class="btn btn-primary btn-lg">View</a>
+                            <h1 style="color: white">{{ Name }}</h1>
+                            <a href="#{{ @key }}" class="btn btn-primary btn-lg">View</a>
                         </div>
                     </div>
                 </div>
             </div>
-
+            {{/each}}
+        {{else}}
+            <div class="col-md-12 mb-4" style="text-align: center">
+                <h1 style="color: firebrick">No Record Found</h1>
+            </div>
+        {{/if}}
         </div>
     </div>
 
