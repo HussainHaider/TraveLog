@@ -13,6 +13,7 @@ const user = require('./controllers/user.js');
 const userProfile = require('./controllers/userProfile.js');
 const userJournal = require('./controllers/journal.js');
 const search = require('./controllers/search.js');
+const gallery = require('./controllers/gallery.js');
 
 var app = express();
 
@@ -111,6 +112,8 @@ app.post('/updateJournal/:tripType/:id',isAuthenticated, userJournal.updateUserJ
 app.get('/deleteJournal/:tripType/:id',isAuthenticated, userJournal.deleteUserJournal);
 app.post('/addDiary',isAuthenticated, upload.single('image'), userProfile.addUserDiary);
 app.get('/explore',isAuthenticated, search.explore);
+app.post('/getExplore',isAuthenticated, search.getExplore);
+app.get('/getGalleryDetail/:path',isAuthenticated, gallery.getGalleryDetail);
 app.post('/searchProfiles',isAuthenticated, search.searchProfiles);
 app.get('/userJournal/:id',isAuthenticated, userJournal.UserJournal);
 app.post('/addComment_Rating/:tripType/:itemID',isAuthenticated, userProfile.addCommentRating);

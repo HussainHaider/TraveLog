@@ -1,5 +1,6 @@
 const model = require('../models/model.js');
 
+let LocationType = undefined;
 module.exports = {
     initialize: function() {
         model.initialize();
@@ -23,7 +24,7 @@ module.exports = {
         });
     },
     explore: function(req, res) {
-        let LocationType = req.body.LocationType;
+        console.log('LocationType_2: '+ LocationType);
         if(LocationType === undefined){
             LocationType = 'Historical places';
         }
@@ -38,5 +39,10 @@ module.exports = {
                 res.redirect('/profile');
             });
 
+    },
+    getExplore: function(req, res) {
+        LocationType = req.body.locationType;
+        console.log('LocationType_1: '+ LocationType);
+        res.redirect('/explore');
     }
 };

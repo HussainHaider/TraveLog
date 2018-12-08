@@ -430,4 +430,14 @@ module.exports = {
             });
         });
     },
+    getGalleryDetails:function(path){
+        return new Promise((resolve, reject) => {
+
+            db.ref(path).on('value', function(snapshot) {
+                resolve({
+                    data:snapshot.val()
+                });
+            });
+        });
+    },
 };
