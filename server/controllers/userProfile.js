@@ -93,7 +93,7 @@ module.exports = {
         model.getProfileData(req.session.user.userID)
             .then((result) => {
                 console.log("Successfully read User Data:", result);
-                res.render('Settings', { title: 'Settings | TraveLog',logo:'/images/logo.jpg',updateError:false,Data:result.data });
+                res.render('Settings', { title: 'Settings | TraveLog',logo:'/images/logo.jpg',session: req.session.user,updateError:false,Data:result.data });
             })
             .catch((err) => {
                 console.log("Error reading User Data user:", err);
